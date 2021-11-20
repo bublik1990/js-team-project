@@ -1,0 +1,86 @@
+.modal {
+  position: absolute;
+  width: 280px;
+  height: 958px;
+  left: 20px;
+  top: 20px;
+  background-color: #ffff;
+}
+
+.modal__img {
+  width: 240px;
+  height: 356.57px;
+  border-radius: 5px;
+}
+
+.modal__title {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.modal__table--caption {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #8c8c8c;
+}
+
+.modal__table--data {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000000;
+}
+
+.modal__text--title {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+}
+
+.modal__text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.modal__button--watched {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+
+  width: 112.58px;
+  height: 44px;
+  background: #ff6b01;
+  border-radius: 5px;
+}
+
+.modal__button--queue {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
