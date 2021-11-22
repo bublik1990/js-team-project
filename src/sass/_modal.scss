@@ -1,19 +1,57 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.is-hidden {
+  display: none;
+}
+
 .modal {
   position: absolute;
   width: 280px;
-  height: 958px;
-  left: 20px;
-  top: 20px;
+
+  padding-top: 48px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 41px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
   background-color: #ffff;
 }
 
+.modal__closebtn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 .modal__img {
   width: 240px;
   height: 356.57px;
   border-radius: 5px;
+  margin-bottom: 30px;
 }
 
 .modal__title {
+  margin-top: 0;
+  margin-bottom: 20px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
@@ -22,7 +60,13 @@
   color: #000000;
 }
 
+.modal__table {
+  margin-bottom: 20px;
+}
+
 .modal__table--caption {
+  padding-right: 40px;
+  padding-bottom: 10px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
@@ -32,55 +76,95 @@
 }
 
 .modal__table--data {
+  padding-bottom: 10px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 14px;
+  line-height: 1.33;
   color: #000000;
 }
 
+.last_data {
+  padding-bottom: 0;
+}
+
+.modal__table--vote {
+  display: inline-table;
+  text-align: center;
+  align-items: center;
+  width: 36px;
+  height: 16px;
+  background: #ff6b01;
+  border-radius: 5px;
+  color: #ffffff;
+}
+
+.modal__table--votes {
+  display: inline-table;
+  text-align: center;
+  align-items: center;
+  width: 36px;
+  height: 16px;
+  background: #f7f7f7;
+  border-radius: 5px;
+}
+
 .modal__text--title {
+  margin-top: 0px;
+  margin-bottom: 10px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 1.33;
   color: #000000;
 }
 
 .modal__text {
+  margin-top: 0px;
+  margin-bottom: 20px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 20px;
+  line-height: 1.6;
   color: #000000;
 }
 
 .modal__button--watched {
+  margin-top: 0;
+  padding: 0;
+  text-transform: uppercase;
+  margin-right: 15px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
   color: #ffffff;
-
   width: 112.58px;
   height: 44px;
   background: #ff6b01;
+  border: 1px solid #ff6b01;
   border-radius: 5px;
+  border-color: #ff6b01;
+  cursor: pointer;
 }
 
 .modal__button--queue {
+  text-transform: uppercase;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
   color: #000000;
-
+  background-color: #ffffff;
+  width: 112.58px;
+  height: 44px;
   border: 1px solid #000000;
   box-sizing: border-box;
   border-radius: 5px;
+  cursor: pointer;
 }
