@@ -1,20 +1,38 @@
-import filmCardTpl from '../partials/templates/nrfilmCardlist-tmpl.hbs';
-const ANATOLII_API_KEY = '6ab460452e9d6fb8f59cab399bd5ef0f';
-const homeFilmsListRef = document.querySelector('.film-gallery');
+import filmCardTpl from '../partials/templates/filmCardlist-tmpl.hbs';
+import fetchFilms from './api-service.js'
 
-export function getPopularFilms() {
-    fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${ANATOLII_API_KEY}`)
-        .then(respons => respons.json())
-        .then(films => {
-            appendHomeMarkup(films);
-        })
-        .catch(error => console.log(error))
+const galleryRef = document.querySelector('.film-gallery');
+const API = new fetchFilms;
+
+export function clearGalleryMarkup() {
+    galleryRef.innerHTML = '';
 }
 
-function appendHomeMarkup(films) {
-    homeFilmsListRef.insertAdjacentHTML('beforeend', filmCardTpl(films));
+export async function appendPopularFilmsMarkup() {
+    const films = await API.getPopularFilms();
+    galleryRef.insertAdjacentHTML('beforeend', filmCardTpl(films));
 }
 
-export function clearHomeMarkup() {
-    homeFilmsListRef.innerHTML = '';
+export async function onSearch(e) {
+    const form = e.currentTarget;
+    const searchQuery = form.elements.query.value.toLowerCase().trim();
+
+    if (!searchQuery) {
+        // ----- Ошибка, если запрос пустой
+        return;
+    }
+
+    API.resetPage();
+    API.query = searchQuery;
+    const filmsCollection = await API.getSearchFilms();
+    clearGalleryMarkup();
+    appendSearchFilmsMarkup(filmsCollection);
+
+    // ----- Пришла одна страница, спрятать пагинацию
+    // if (filmsCollection.total_pages === 1) { 
+    // }
+}
+
+function appendSearchFilmsMarkup(filmsCollection) {
+    galleryRef.insertAdjacentHTML('beforeend', filmCardTpl(filmsCollection));
 }

@@ -1,9 +1,22 @@
-import { getPopularFilms, clearHomeMarkup} from './home.js'
+import { appendPopularFilmsMarkup, onSearch, clearGalleryMarkup } from './home.js'
+import { toFixCardMarkup } from './markup-service'
+
+// ----- Сылка на форму поиска
+// const inputRef = document.querySelector('.search-form');
+
+// ----- Слушатель, повесить на кнопку поиска
+// inputRef.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     onSearch(e);
+// })
 
 
-// функция подгружает популярные фильмы при переходе на (стартовую) страницу Home
-getPopularFilms();
+// ----- Функция заполняет галерею популярными фильмами (стартовая страница)
+appendPopularFilmsMarkup();
 
 
-// функция удаляет популярные фильмы, например, когда нужно перейти на страницу My Library
-clearHomeMarkup;
+// ----- Функция очищает галерею
+// clearGalleryMarkup();
+
+
+toFixCardMarkup();
