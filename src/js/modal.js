@@ -1,5 +1,5 @@
 import modalCardtpl from '../partials/templates/modalCard.hbs';
-import filmCardTpl from '../partials/templates/nrfilmCardlist-tmpl.hbs';
+//import filmCardTpl from '../partials/templates/nrfilmCardlist-tmpl.hbs';
 
 
 const openModal = document.querySelector('.backdrop');

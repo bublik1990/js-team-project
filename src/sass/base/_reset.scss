@@ -1,0 +1,97 @@
+:root {
+    --black-color: #000;
+    --aiming-color: #2196f3;
+    --main-text-color: #212121;
+    --description-text-color: #757575;
+    --background-color: #2f303a;
+    --body-color: #ffffff;
+    --border-line-color: #eeeeee;
+    --background-button-hover: #188ce8;
+    --background-color-our-team-section: #f5f4fa;
+    --header-border-color: #ececec;
+    --social-lincs-client-color: #afb1b8;
+    --main-fonts: "Roboto", sans-serif;
+    --logo-fonts: "Raleway", sans-serif;
+    --cubic: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  html {
+    box-sizing: border-box;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+  
+  body {
+    font-family: var(--main-fonts);
+    font-style: normal;
+    color: var(--main-text-color);
+  }
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+  }
+  
+  input {
+    font-family: inherit;
+  }
+
+  section {
+    padding-top: 0px;
+    padding-bottom: 40px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  @media screen and (min-width: 768px) {
+    section {
+      padding-top: 40px;
+      padding-bottom: 60px;
+    }
+  }
+  
+  .container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  @media screen and (min-width: 480px) {
+    .container {
+      max-width: 480px;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+  
+  .visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+  }

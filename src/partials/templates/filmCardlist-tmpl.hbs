@@ -1,5 +1,5 @@
   {{#each this.results}}
-   <div class="film-card">
+   <li class="film-card">
         <img class="film-card__img" src="https://image.tmdb.org/t/p/w500{{this.poster_path}}" alt="{{this.original_title}}" />
         <h3 class="film-card__header">{{this.original_title}}{{this.name}}</h3>
         <div class="film-card__meta">
@@ -11,5 +11,5 @@
           <span class="film-card__year">{{this.release_date}}{{this.first_air_date}}</span>
           <span class="film-card__rating">{{this.vote_average}}</span>
         </div>
-      </div>
+      </li>
     {{/each}}
