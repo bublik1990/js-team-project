@@ -1,6 +1,14 @@
 export const OLEH_API_KEY = 'f13d574bf8d052eda50f9ad2f6a4d7c7';
 
-export function movieGenreCompiler() {
+export function toFixCardMarkup() {
+  movieGenreCompiler();
+  tvGenreCompiler();
+  filterYear();
+  makeSmallFilmname();
+  makeDoubleDigitRating();
+}
+
+function movieGenreCompiler() {
   fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${OLEH_API_KEY}&language=en-US`)
     .then(response => response.json())
     .then(data => {
@@ -17,7 +25,7 @@ export function movieGenreCompiler() {
       });
     });
 }
-export function tvGenreCompiler() {
+function tvGenreCompiler() {
   fetch(`https://api.themoviedb.org/3/genre/tv/list?api_key=${OLEH_API_KEY}&language=en-US`)
     .then(response => response.json())
     .then(data => {
@@ -37,14 +45,14 @@ export function tvGenreCompiler() {
       });
     });
 }
-export function filterYear() {
+function filterYear() {
   let relaseDate = document.querySelectorAll('.film-card__year');
   relaseDate.forEach(el => {
     let relaseYear = el.textContent.slice(0, 4);
     el.innerHTML = relaseYear;
   });
 }
-export function makeSmallFilmname() {
+function makeSmallFilmname() {
     let filmNames = document.querySelectorAll('.film-card__header');
     filmNames.forEach(filmName => {
       if (filmName.textContent.length > 30) {
@@ -53,7 +61,7 @@ export function makeSmallFilmname() {
       }
     });
 }
-export function makeDoubleDigitRating() {
+function makeDoubleDigitRating() {
      let filmRatings = document.querySelectorAll('.film-card__rating');
      filmRatings.forEach(filmRating => {
        if (filmRating.textContent.length == 1) {
@@ -61,3 +69,4 @@ export function makeDoubleDigitRating() {
        }
      });
 }
+
