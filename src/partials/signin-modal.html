@@ -1,68 +1,67 @@
 <div class="signin-backdrop is-hidden" data-signin-modal>
+  <div class="signin__modal">
+    <button class="signin__modal-closeBtn" aria-label="Close modal window" data-signin-close>
+        <svg class="modal__close-image">
+          <use href="./images/svg/sprite.svg#icon-close"></use>
+        </svg>
+    </button>
 
-    <div class="signin__modal">
+    <ul class="signin__choice">
+      <li class="signin__tab active-tab" data-tab="signin">SignIn</li>
+      <li class="registration__tab" data-tab="registration">Registration</li>
+    </ul>
 
-        <button class="signin__modal-closeBtn" aria-label="Close modal window" data-signin-close>
-            <svg class="modal__close-image">
-              <use href="./images/svg/sprite.svg#icon-close"></use>
-            </svg>
+    <div class="form__container">
+      <form name="signin-form" class="signin__form" id="signin">
+        <label class="signin__field">
+          <span class="signin__label">Email</span>
+          <span class="signin__input-wrap">
+            <input class="signin__input" type="email" name="email" id="sign-email" />
+          </span>
+        </label>
+
+        <label class="signin__field">
+          <span class="signin__label">Password</span>
+          <span class="signin__input-wrap">
+            <input class="signin__input" type="password" name="password" id="sign-password" />
+          </span>
+        </label>
+
+        <button class="signin__input" aria-label="Submit" type="submit" id="sign-button">Sign In</button>
+      </form>
+
+      <form name="registration-form" class="visually-hidden signin__form" id="registration">
+        <label class="signin__field">
+          <span class="signin__label">Email</span>
+          <span class="signin__input-wrap">
+            <input class="signin__input" type="email" name="email" id="regist-email" />
+          </span>
+        </label>
+
+        <label class="signin__field">
+          <span class="signin__label">Password</span>
+          <span class="signin__input-wrap">
+            <input class="signin__input" type="password" name="password" id="regist-password" />
+          </span>
+        </label>
+
+        <label class="signin__field">
+          <span class="signin__label">Repeat Password</span>
+          <span class="signin__input-wrap">
+            <input
+              class="signin__input"
+              type="password"
+              name="repeat-password"
+              id="registRepeat-password"
+            />
+          </span>
+        </label>
+
+        <button class="signin__input" aria-label="Submit" type="submit" id="regist-button">
+          Register
         </button>
+      </form>
 
-
-
-        <ul class="signin__choice">
-            <li class="signin__tab active-tab" data-tab="signin">SignIn</li>
-            <li class="registration__tab" data-tab="registration">Registration</li>
-        </ul>
-        
-        <div class="form__container">
-            <form name="signin-form" class="signin__form" id="signin">
-
-                <label class="signin__field">
-                    <span class="signin__label">Email</span>
-                    <span class="signin__input-wrap">
-                        <input class="signin__input" type="email" name="email">
-                    </span>
-                </label>
-    
-                <label class="signin__field">
-                    <span class="signin__label">Password</span>
-                    <span class="signin__input-wrap">
-                        <input class="signin__input" type="password" name="password">
-                    </span>
-                </label>
-               
-                <button class="signin__button" aria-label="Отправить данные" type="submit">Sign In</button>
-    
-            </form>
-    
-            <form name="registration-form" class="visually-hidden signin__form" id="registration">
-    
-                <label class="signin__field">
-                    <span class="signin__label">Email</span>
-                    <span class="signin__input-wrap">
-                        <input class="signin__input" type="email" name="email">
-                    </span>
-                </label>
-    
-                <label class="signin__field">
-                    <span class="signin__label">Password</span>
-                    <span class="signin__input-wrap">
-                        <input class="signin__input" type="password" name="password">
-                    </span>
-                </label>
-               
-                <label class="signin__field">
-                    <span class="signin__label">Repeat Password</span>
-                    <span class="signin__input-wrap">
-                        <input class="signin__input" type="password" name="repeat-password">
-                    </span>
-                </label>
-    
-                <button class="signin__button" aria-label="Send data" type="submit">Register</button>
-    
-            </form>
-        </div>
-        
     </div>
+  </div>
 </div>
