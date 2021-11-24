@@ -28,19 +28,38 @@
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 41px;
-  top: 55%;
-  left: 40%;
-  transform: translate(-50%, -50%) scale(1);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%) scale(1);
   background-color: #ffff;
 
   @media screen and (min-width: 768px) {
     width: 618px;
-    height: 562px;
+    padding-top: 42px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 40px;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%) scale(1);
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1024px) {
     width: 882px;
     height: 568px;
+    padding-top: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 40px;
+    top: 93%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.film-container {
+  @media screen and (min-width: 768px) {
+    display: flex;
   }
 }
 
@@ -68,6 +87,20 @@
   height: 356.57px;
   border-radius: 5px;
   margin-bottom: 30px;
+
+  @media screen and (min-width: 768px) {
+    width: 264px;
+    height: 373.55px;
+    margin-bottom: 0px;
+    margin-right: 32px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 396px;
+    height: 477.8px;
+    margin-bottom: 0px;
+    margin-right: 30px;
+  }
 }
 
 .modal__title {
@@ -77,8 +110,13 @@
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
-  line-height: 23px;
+  line-height: 1.15;
   color: #000000;
+
+  @media screen and (min-width: 1024px) {
+    font-size: 30px;
+    line-height: 1.16;
+  }
 }
 
 .modal__table {
@@ -92,7 +130,7 @@
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px;
+  line-height: 1.33;
   color: #8c8c8c;
 }
 
@@ -155,6 +193,14 @@
 
 .modal__button {
   display: flex;
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    bottom: 40px;
+    right: 45px;
+  }
+  @media screen and (min-width: 1024px) {
+    right: 215px;
+  }
 }
 
 .modal__button--watched {
@@ -175,6 +221,13 @@
   border-radius: 5px;
   border-color: #ff6b01;
   cursor: pointer;
+  @media screen and (min-width: 768px) {
+    width: 125px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 136px;
+  }
 }
 
 .modal__button--queue {
@@ -192,4 +245,11 @@
   box-sizing: border-box;
   border-radius: 5px;
   cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    width: 125px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 136px;
+  }
 }
