@@ -1,11 +1,10 @@
 import { appendPopularFilmsMarkup, onSearch, clearGalleryMarkup } from './home.js'
-import { toFixCardMarkup } from './markup-service'
 
-// ----- Сылка на форму поиска
-// const inputRef = document.querySelector('.search-form');
 
-// ----- Слушатель, повесить на кнопку поиска
-// inputRef.addEventListener('submit', (e) => {
+// const searchFormRef = document.querySelector('#seach-form');
+
+
+// searchFormRef.addEventListener('submit', (e) => {
 //     e.preventDefault();
 //     onSearch(e);
 // })
@@ -17,6 +16,3 @@ appendPopularFilmsMarkup();
 
 // ----- Функция очищает галерею
 // clearGalleryMarkup();
-
-
-toFixCardMarkup();
