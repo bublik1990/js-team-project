@@ -1,7 +1,13 @@
 <div class="signin-backdrop is-hidden" data-signin-modal>
 
     <div class="signin__modal">
-        <button class="signin__modal-closeBtn" aria-label="Close modal window" data-signin-close>x</button>
+
+        <button class="signin__modal-closeBtn" aria-label="Close modal window" data-signin-close>
+            <svg class="modal__close-image">
+              <use href="./images/svg/sprite.svg#icon-close"></use>
+            </svg>
+        </button>
+
 
 
         <ul class="signin__choice">
@@ -26,7 +32,7 @@
                     </span>
                 </label>
                
-                <button class="" aria-label="Отправить данные" type="submit">Login</button>
+                <button class="signin__button" aria-label="Отправить данные" type="submit">Sign In</button>
     
             </form>
     
@@ -53,7 +59,7 @@
                     </span>
                 </label>
     
-                <button class="n" aria-label="Отправить данные" type="submit">Login</button>
+                <button class="signin__button" aria-label="Send data" type="submit">Register</button>
     
             </form>
         </div>
