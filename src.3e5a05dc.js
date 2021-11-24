@@ -33,4 +33,4 @@ const t=document.querySelectorAll(".signin__choice li");function e(t){const e=t.
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/main"),require("./js/templateTEST.js"),require("./js/pagination"),require("./js/modal"),require("./js/team-modal"),require("./js/add-to-queue"),require("./js/add-to-watched"),require("./js/home"),require("./js/signin-modal");
 },{"./sass/main.scss":"clu1","./js/main":"d6sW","./js/templateTEST.js":"Ckxl","./js/pagination":"o8lo","./js/modal":"RSqK","./js/team-modal":"SVxB","./js/add-to-queue":"o8lo","./js/add-to-watched":"o8lo","./js/home":"nqs3","./js/signin-modal":"BUvW"}]},{},["Focm"], null)
-//# sourceMappingURL=/js-team-project/src.a5690f9c.js.map
+//# sourceMappingURL=/js-team-project/src.3e5a05dc.js.map
