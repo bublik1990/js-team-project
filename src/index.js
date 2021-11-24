@@ -8,4 +8,5 @@ import './js/team-modal';
 import './js/add-to-queue';
 import './js/add-to-watched';
 import './js/home';
+import './js/signin-modal';
 
