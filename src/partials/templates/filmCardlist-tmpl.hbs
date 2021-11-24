@@ -1,5 +1,5 @@
 {{#each this.results}}
-  <li class="film-card">
+  <li class="film-card" data-id="{{this.id}}">
     <img class="film-card__img" src="https://image.tmdb.org/t/p/w500{{this.poster_path}}" alt="{{this.original_title}}" />
     <h3 class="film-card__header">{{this.original_title}}{{this.name}}</h3>
     <div class="film-card__meta">
