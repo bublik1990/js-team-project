@@ -3,7 +3,7 @@
 // Feel free to DELETE it any time u want
 // ДЛЯ ТЕСТУ - РОЗКОМЕНТУЙТЕ НАСТУПНУ ФУНКЦІЮ
 
-// fetchFilms();
+fetchFilms();
 
 import filmCard from '../partials/templates/filmCard-tmpl.hbs';
 import filmCards from '../partials/templates/filmCardlist-tmpl.hbs';
