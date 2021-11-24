@@ -13,7 +13,7 @@ closeModalBackdrop.addEventListener('click', onBackdropClick);
 
 function onFilmCardClick(evt) {
   let element = evt.target;
-  let targetElement = element.closest('li');
+  let targetElement = element.closest('.film-card');
   let targetId = targetElement.dataset.id;
   openModal.classList.remove('is-hidden');
   window.addEventListener('keydown', onEscKeyPress);
