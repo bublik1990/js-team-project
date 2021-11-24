@@ -7,7 +7,7 @@ img {
   display: block;
 }
 
-.backdrop {
+.team-backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -94,13 +94,17 @@ img {
 .modal__close-image {
   width: 16px;
   height: 16px;
+  fill: #545454;
 }
 
 .team-modal__button {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   border-radius: 50%;
-  border-color: black;
+  border-color: #545454;
   border-width: 1px;
   border-style: solid;
   top: 8px;
@@ -111,8 +115,11 @@ img {
 
   &:hover,
   &:focus {
-    fill: #ff6b08;
+    // fill: #ff6b08;
     border-color: #ff6b08;
+    .modal__close-image {
+      fill: #ff6b08;
+    }
   }
 }
 
@@ -124,10 +131,11 @@ img {
   margin-block-start: 0;
   margin-block-end: 0;
   font-weight: 500;
-  font-size: 16px;
-  line-height: 1.188;
+  font-size: 20px;
+  line-height: 1.172;
   letter-spacing: 0.03em;
   margin-bottom: 10px;
+  color: #545454;
 }
 
 .sl__list {
