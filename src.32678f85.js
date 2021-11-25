@@ -72,4 +72,4 @@ var e=require("process");Object.defineProperty(exports,"__esModule",{value:!0}),
 },{"firebase/app":"OJEJ","firebase/analytics":"JWp9","firebase/auth":"zKjx","firebase/database":"Uuoh"}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss"),require("./js/main"),require("./js/templateTEST.js"),require("./js/pagination"),require("./js/modal"),require("./js/team-modal"),require("./js/add-to-queue"),require("./js/add-to-watched"),require("./js/home"),require("./js/signin-modal"),require("./js/firebase");
 },{"./sass/main.scss":"clu1","./js/main":"d6sW","./js/templateTEST.js":"Ckxl","./js/pagination":"o8lo","./js/modal":"RSqK","./js/team-modal":"SVxB","./js/add-to-queue":"o8lo","./js/add-to-watched":"o8lo","./js/home":"nqs3","./js/signin-modal":"BUvW","./js/firebase":"TXxf"}]},{},["Focm"], null)
-//# sourceMappingURL=/js-team-project/src.1e9d8046.js.map
+//# sourceMappingURL=/js-team-project/src.32678f85.js.map
