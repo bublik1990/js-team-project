@@ -15,11 +15,11 @@ const headerLibraryBtn =document.querySelectorAll('.header__item.library')
 export function clearGalleryMarkup() {
   galleryRef.innerHTML = '';
 }
+
 export async function appendPopularFilmsMarkup() {
   const films = await API.getPopularFilms();
-  galleryRef.insertAdjacentHTML('beforeend', filmCardTpl(films));
+  galleryRef.innerHTML = filmCardTpl(films);
   toFixCardMarkup();
-  spinnerHide();
 }
 
 async function onSearch(e) {
@@ -39,7 +39,6 @@ async function onSearch(e) {
   const filmsCollection = await API.getSearchFilms();
   appendSearchFilmsMarkup(filmsCollection);
   toFixCardMarkup();
-  spinnerHide();
 
   // ----- Пришла одна страница, спрятать пагинацию
   // if (filmsCollection.total_pages === 1) {
@@ -48,7 +47,7 @@ async function onSearch(e) {
 
 // ----- Заполняет разметку фильмами из поиска
 function appendSearchFilmsMarkup(filmsCollection) {
-  galleryRef.insertAdjacentHTML('beforeend', filmCardTpl(filmsCollection));
+  galleryRef.innerHTML = filmCardTpl(filmsCollection);
 }
 
 // ----- Слушатель на кнопке поиска
