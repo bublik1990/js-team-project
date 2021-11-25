@@ -1,4 +1,5 @@
 import modalCardtpl from '../partials/templates/modalCard.hbs';
+import { filmModalSpinnerShow, spinnerHide } from './spinner';
 //import filmCardTpl from '../partials/templates/nrfilmCardlist-tmpl.hbs';
 
 const openModal = document.querySelector('.film-backdrop');
@@ -13,9 +14,12 @@ closeModalBackdrop.addEventListener('click', onBackdropClick);
 
 function onFilmCardClick(evt) {
   let element = evt.target;
+  if (evt.target == evt.currentTarget) return;
   let targetElement = element.closest('.film-card');
   let targetId = targetElement.dataset.id;
+
   openModal.classList.remove('is-hidden');
+  filmModalSpinnerShow();
   window.addEventListener('keydown', onEscKeyPress);
   fetchTargetFilm(targetId);
 }
@@ -38,6 +42,7 @@ function createModal(film) {
 function onCloseModal() {
   window.removeEventListener('keydown', onEscKeyPress);
   openModal.classList.add('is-hidden');
+  filmContainer.innerHTML = ' ';
 }
 
 function onBackdropClick(event) {
