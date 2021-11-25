@@ -62,6 +62,8 @@ for (let i = 0; i < headerHomeBtn.length; i++) {
   headerHomeBtn[i].addEventListener('click', () => {
     headerLibraryBox.classList.add('is-inactive');
     headerHomeBox.classList.remove('is-inactive');
+    clearGalleryMarkup();
+    appendPopularFilmsMarkup();
   })
 }
 
@@ -70,5 +72,6 @@ for (let i = 0; i < headerLibraryBtn.length; i++) {
   headerLibraryBtn[i].addEventListener('click', () => {
     headerHomeBox.classList.add('is-inactive');
     headerLibraryBox.classList.remove('is-inactive');
+    clearGalleryMarkup();
   })
 }
