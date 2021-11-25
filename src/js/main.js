@@ -1,6 +1,7 @@
 import { appendPopularFilmsMarkup, onSearch, clearGalleryMarkup } from './home.js'
+import { spinnerShow } from './spinner';
 
-
+spinnerShow();
 // const searchFormRef = document.querySelector('#seach-form');
 
 

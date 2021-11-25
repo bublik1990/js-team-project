@@ -3,11 +3,12 @@
 // Feel free to DELETE it any time u want
 // ДЛЯ ТЕСТУ - РОЗКОМЕНТУЙТЕ НАСТУПНУ ФУНКЦІЮ
 
-fetchFilms();
+// fetchFilms();
 
 import filmCard from '../partials/templates/filmCard-tmpl.hbs';
 import filmCards from '../partials/templates/filmCardlist-tmpl.hbs';
 import noRatingFilmCards from '../partials/templates/nrFilmCardlist-tmpl.hbs';
+import spinner from '../partials/templates/spinner-tmpl.hbs'
 import { toFixCardMarkup, OLEH_API_KEY } from './markup-service';
 
 const body = document.querySelector('body');
@@ -28,3 +29,5 @@ function createMarkup(data) {
   customContainer.innerHTML = markup;
   toFixCardMarkup();
 }
+
+

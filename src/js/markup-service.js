@@ -4,7 +4,6 @@ export function toFixCardMarkup() {
   movieGenreCompiler();
   tvGenreCompiler();
   filterYear();
-  makeSmallFilmname();
   makeDoubleDigitRating();
 }
 
@@ -52,15 +51,7 @@ function filterYear() {
     el.innerHTML = relaseYear;
   });
 }
-function makeSmallFilmname() {
-    let filmNames = document.querySelectorAll('.film-card__header');
-    filmNames.forEach(filmName => {
-      if (filmName.textContent.length > 30) {
-        filmName.style.fontSize = '11px';
-        filmName.style.letterSpacing = '0.07em';
-      }
-    });
-}
+
 function makeDoubleDigitRating() {
      let filmRatings = document.querySelectorAll('.film-card__rating');
      filmRatings.forEach(filmRating => {
