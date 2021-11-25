@@ -1,42 +1,42 @@
 import filmCardTpl from '../partials/templates/filmCardlist-tmpl.hbs';
-import fetchFilms from './api-service.js'
-import { toFixCardMarkup } from './markup-service.js'
+import fetchFilms from './api-service.js';
+import { toFixCardMarkup } from './markup-service.js';
 
 const galleryRef = document.querySelector('.film-gallery');
-const API = new fetchFilms;
+const API = new fetchFilms();
 
 export function clearGalleryMarkup() {
-    galleryRef.innerHTML = '';
+  galleryRef.innerHTML = '';
 }
 
 export async function appendPopularFilmsMarkup() {
-    const films = await API.getPopularFilms();
-    galleryRef.insertAdjacentHTML('beforeend', filmCardTpl(films));
-    toFixCardMarkup();
+  const films = await API.getPopularFilms();
+  galleryRef.insertAdjacentHTML('beforeend', filmCardTpl(films));
+  toFixCardMarkup();
 }
 
 export async function onSearch(e) {
-    const form = e.currentTarget;
-    const searchQuery = form.elements.query.value.toLowerCase().trim();
+  const form = e.currentTarget;
+  const searchQuery = form.elements.query.value.toLowerCase().trim();
 
-    if (!searchQuery) {
-        // ----- Ошибка, если запрос пустой
-        clearGalleryMarkup();
-        return;
-    }
-
-    API.resetPage();
-    API.query = searchQuery;
-    const filmsCollection = await API.getSearchFilms();
+  if (!searchQuery) {
+    // ----- Ошибка, если запрос пустой
     clearGalleryMarkup();
-    appendSearchFilmsMarkup(filmsCollection);
-    toFixCardMarkup();
+    return;
+  }
 
-    // ----- Пришла одна страница, спрятать пагинацию
-    // if (filmsCollection.total_pages === 1) { 
-    // }
+  API.resetPage();
+  API.query = searchQuery;
+  const filmsCollection = await API.getSearchFilms();
+  clearGalleryMarkup();
+  appendSearchFilmsMarkup(filmsCollection);
+  toFixCardMarkup();
+
+  // ----- Пришла одна страница, спрятать пагинацию
+  // if (filmsCollection.total_pages === 1) {
+  // }
 }
 
 function appendSearchFilmsMarkup(filmsCollection) {
-    galleryRef.insertAdjacentHTML('beforeend', filmCardTpl(filmsCollection));
+  galleryRef.insertAdjacentHTML('beforeend', filmCardTpl(filmsCollection));
 }

@@ -3,7 +3,7 @@
   src='https://image.tmdb.org/t/p/w500{{this.poster_path}}'
   alt='{{this.original_title}}'
 />
-
+<div>
 <h2 class='modal__title' data-id='{{this.id}}'>{{this.original_title}} </h2>
 
 <table class='modal__table'>
@@ -25,9 +25,10 @@
   </tr>
   <tr class='modal__table--row'>
     <td class='modal__table--caption last_data'>Genre</td>
-    {{#each this.genres}}
-      <td class='modal__table--data last_data'>{{this.name}}</td>
-    {{/each}}
+      <td class='modal__table--data last_data'>
+        {{#each this.genres}} 
+        {{this.name}}
+        {{/each}}</td>
   </tr>
 </table>
 
@@ -35,3 +36,4 @@
 
 <p class='modal__text'>{{this.overview}}
 </p>
+</div>
