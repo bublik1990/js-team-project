@@ -1,7 +1,7 @@
 import filmCardTpl from '../partials/templates/filmCardlist-tmpl.hbs';
 import fetchFilms from './api-service.js';
 import { toFixCardMarkup } from './markup-service.js';
-import { spinnerShow, spinnerHide } from './spinner'
+import { spinnerShow } from './spinner'
 const API = new fetchFilms();
 
 const galleryRef = document.querySelector('.film-gallery');
@@ -62,6 +62,7 @@ for (let i = 0; i < headerHomeBtn.length; i++) {
     headerLibraryBox.classList.add('is-inactive');
     headerHomeBox.classList.remove('is-inactive');
     clearGalleryMarkup();
+    spinnerShow();
     appendPopularFilmsMarkup();
   })
 }
