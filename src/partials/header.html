@@ -7,15 +7,15 @@
       <p class="header__title">Filmoteka</p>
     </a>
     <ul class="header__menu">
-      <li class="header__item active__item">Home</li>
-      <li class="header__item">My library</li>
+      <li class="header__item active__item home">Home</li>
+      <li class="header__item library">My library</li>
       <li class="header__item">
         <button class="header__signin header__button" data-signin-open>Sign In</button>
       </li>
     </ul>
   </nav>
   <form class="header__form" action="">
-    <input class="header__input" type="text" placeholder="Поиск фильмов">
+    <input class="header__input" type="text" name="query" placeholder="Поиск фильмов" autocomplete="off">
     <button class="header__submitbtn" type="submit">
       <svg class="social__icon" width="12" height="12">
         <use href="./images/svg/sprite.svg#icon-search"></use>
@@ -33,8 +33,8 @@
       <p class="header__title">Filmoteka</p>
     </a>
     <ul class="header__menu">
-      <li class="header__item">Home</li>
-      <li class="header__item active__item">my library</li>
+      <li class="header__item home">Home</li>
+      <li class="header__item active__item library">my library</li>
       <li class="header__item">
         <button class="header__signin header__button" data-signin-open>Sign In</button>
       </li>
