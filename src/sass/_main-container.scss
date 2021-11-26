@@ -1,27 +1,54 @@
+.container {
+  width: 320px;
+  margin: 0 auto;
+  @media screen and (min-width: 768px) {
+    width: 768px;
+  }
+  @media screen and (min-width: 1024px)  {
+    width: 1024px;
+  }
+}
 .film {
+  padding: 20px 20px 40px 20px;
+  @media screen and (min-width: 768px) {
+    padding: 30px 75px 50px;
+  }
+  @media screen and (min-width: 1024px) {
+    padding: 30px 70px 50px;
+  }
     &-gallery {
-    padding: 0;
-    margin: 0;
       @media screen and (min-width: 768px) {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
-        margin-left: -30px;
-      }
-  }
-    
-  &-card {
-    margin: 0 auto;
-    margin-top: 20px;
-    // border: 1px solid #000;
-      @media screen and (min-width: 768px) {
-        flex-basis: calc((100% - 60px)/2);
-        margin-top: 30px;
-        margin-left: 30px;
-        margin-right: 0;
+        margin: 0px -15px;
       }
       @media screen and (min-width: 1024px) {
-        flex-basis: calc((100% - 90px)/3);
+        
       }
-  }
+    }
+    
+    &-card {
+      max-width: 280px;
+      margin: 0 auto;
+      // border: 1px solid #000;
+        @media screen and (min-width: 768px) {
+          max-width: 294px;
+          flex-basis: calc((100% - 60px)/2);
+          margin: 0px 15px;
+        }
+        @media screen and (min-width: 1024px) {
+          max-width: 274px;
+          flex-basis: calc((100% - 90px)/3);
+        }
+    }
+    &-card:not(:last-child) {
+      margin-bottom: 20px;
+      @media screen and (min-width: 768px) {
+        margin-bottom: 30px;
+      }
+    }
+}
+
+.film-card__img {
+  border-radius: 8px;
 }
