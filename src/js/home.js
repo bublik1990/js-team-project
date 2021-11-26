@@ -35,7 +35,7 @@ async function onSearch(e) {
   API.resetPage();
   API.query = searchQuery;
   clearGalleryMarkup();
-  spinnerShow()
+  spinnerShow(galleryRef);
   const filmsCollection = await API.getSearchFilms();
   appendSearchFilmsMarkup(filmsCollection);
   toFixCardMarkup();
@@ -62,7 +62,7 @@ for (let i = 0; i < headerHomeBtn.length; i++) {
     headerLibraryBox.classList.add('is-inactive');
     headerHomeBox.classList.remove('is-inactive');
     clearGalleryMarkup();
-    spinnerShow();
+    spinnerShow(galleryRef);
     appendPopularFilmsMarkup();
   })
 }
