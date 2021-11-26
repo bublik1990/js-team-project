@@ -21,14 +21,13 @@ function makeTabActive(event) {
 }
 
 const refs = {
-    openSignInModalBtn: document.querySelector('[data-signin-open]'),
-    closeSignInModalBtn: document.querySelector('[data-signin-close]'),
+    openSignInModalBtn: document.querySelectorAll('[data-signin-open]'),
+    closeSignInModalBtn: document.querySelectorAll('[data-signin-close]'),
     signinModal: document.querySelector('[data-signin-modal]'),
   };
 
-
-  refs.openSignInModalBtn.addEventListener('click', toggleModal);
-  refs.closeSignInModalBtn.addEventListener('click', toggleModal);
+  refs.openSignInModalBtn.forEach(el => el.addEventListener('click', toggleModal));
+  refs.closeSignInModalBtn.forEach(el => el.addEventListener('click', toggleModal));
 
   function toggleModal() {
     refs.signinModal.classList.toggle('is-hidden');
