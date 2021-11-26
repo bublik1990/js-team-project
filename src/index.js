@@ -10,3 +10,4 @@ import './js/add-to-watched';
 import './js/home';
 import './js/signin-modal';
 import './js/firebase';
+import './js/pnotify';
