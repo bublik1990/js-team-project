@@ -13,9 +13,10 @@
   }
   
   body {
-    font-family: var(--main-fonts);
     font-style: normal;
-    color: var(--main-text-color);
+    color: #fff;
+    position: relative;
+    min-height: 100vh;
   }
   
   ul {
