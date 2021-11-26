@@ -1,15 +1,10 @@
 // const email = 'nana@email.com';
 // const password = 'mypassword';
-
+import template from '../partials/templates/filmCardlist-tmpl.hbs';
+// import appendSearchFilmsMarkup from './home';
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from 'firebase/auth';
+// import { getAnalytics } from 'firebase/analytics';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,  onAuthStateChanged} from 'firebase/auth';
 import { getDatabase, ref, set, get, child, update } from 'firebase/database';
 
 const firebaseConfig = {
@@ -27,30 +22,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase();
-
-const analytics = getAnalytics(app);
-
-function writeUserData(userId, ob) {
-  set(ref(database, 'users/' + userId), ob);
-}
-
-function updateData(userId, ob, library, filmId) {
-  update(ref(database, 'users/' + userId + `/${library}/` + filmId), ob);
-}
-
-const dbRef = ref(database);
-
-get(child(dbRef, `users/`)).then(snapshot => {
-  // console.log(snapshot.val());
-  // console.log(snapshot.toJSON());
-});
-
-/////////////////////////////////////////////////////////////////////////
-
+const auth = getAuth();
 const dataCreate = {
   watched: {},
   queue: {},
 };
+
 
 const refs = {
   signinModal: document.querySelector('[data-signin-modal]'),
@@ -69,63 +46,27 @@ const refs = {
   watchedButton: document.querySelector('.modal__button--watched'),
   queueButton: document.querySelector('.modal__button--queue'),
   filmId: document.querySelector('.modal__title'),
+
+  libraryPage: document.querySelector('.header__library-page'),
+  homePage: document.querySelector('.header__home-page'),
+  libraryPageHeader: document.querySelector('.header__library'),
+  homePageHeader: document.querySelector('.header__main'),
+  filmGallery: document.querySelector('.film-gallery'),
+  watched: document.querySelector('.library__watched'),
+  queue: document.querySelector('.library__queue')
 };
 
-const auth = getAuth();
+
 
 refs.signForm.addEventListener('submit', onSubmitSignin);
 refs.registrationForm.addEventListener('submit', onSubmitRegist);
 refs.watchedButton.addEventListener('click', onClickWatched);
 refs.queueButton.addEventListener('click', onClickQueue);
 
-function onSubmitSignin(e) {
-  e.preventDefault();
-  const email = refs.signFormEmail.value;
-  const password = refs.signFormPassword.value;
-  signIn(auth, email, password);
-  refs.signinModal.classList.toggle('is-hidden');
-}
+refs.libraryPage.addEventListener('click', loadLibraryPage);
+refs.watched.addEventListener('click', showWatchedData);
+refs.queue.addEventListener('click', showQueueData);
 
-function onSubmitRegist(e) {
-  e.preventDefault();
-  const email = refs.registFormEmail.value;
-  const password = refs.registFormPassword.value;
-  const passwordRepeat = refs.registRepeatFormPassword.value;
-
-  console.log(email, password);
-  if (password === passwordRepeat) {
-    createUser(auth, email, password);
-    refs.signinModal.classList.toggle('is-hidden');
-  } else {
-    alert('проверь пароль');
-  }
-}
-
-function onClickWatched() {
-  const modalTitle = document.querySelector('.modal__title');
-  const filmId = modalTitle.dataset.id;
-  const user = auth.currentUser;
-  const uid = user.uid;
-  console.log(uid);
-  fetch(
-    `https://api.themoviedb.org/3/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
-  )
-    .then(response => response.json())
-    .then(data => updateData(uid, data, 'watched', filmId));
-}
-
-function onClickQueue() {
-  const modalTitle = document.querySelector('.modal__title');
-  const filmId = modalTitle.dataset.id;
-  const user = auth.currentUser;
-  const uid = user.uid;
-  console.log(uid);
-  fetch(
-    `https://api.themoviedb.org/3/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
-  )
-    .then(response => response.json())
-    .then(data => updateData(uid, data, 'queue', filmId));
-}
 
 ////////////////// создать пользователя///////////////////////////////////
 
@@ -134,9 +75,6 @@ function createUser(auth, email, password) {
     .then(userCredential => {
       const user = userCredential.user;
       const uid = user.uid;
-      //   console.log(uid);
-      //   console.log(user);
-
       writeUserData(uid, dataCreate);
     })
     .catch(error => {
@@ -145,16 +83,11 @@ function createUser(auth, email, password) {
     });
 }
 
-//////////////// войти в систму ///////////////////////////////////
+//////////////// войти в систему ///////////////////////////////////
 
 function signIn(auth, email, password) {
   signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
-      //   const user = userCredential.user;
-      //   const uid = user.uid;
-      //   console.log(user);
-      //   console.log(uid);
-      // ...
     })
     .catch(error => {
       const errorCode = error.code;
@@ -162,27 +95,7 @@ function signIn(auth, email, password) {
     });
 }
 
-// signIn(auth, email, password);
-
-///////////  наблюдателя состояния аутентификации и получите данные пользователя ///////////////
-
-onAuthStateChanged(auth, user => {
-  if (user) {
-    const uid = user.uid;
-    // console.log(uid);
-    // console.log(auth.currentUser);
-    get(child(dbRef, `users/${uid}/`)).then(snapshot => {
-      console.log(snapshot.val());
-    });
-    // console.log(user);
-  } else {
-    // User is signed out
-    // alert('войдите в систему');
-    // ...
-  }
-});
-
-//////////// вйти из системы//////////////////////////////////
+//////////// выйти из системы//////////////////////////////////
 
 // function signOutuser(auth, email, password) {
 //   signOut(auth, email, password)
@@ -198,4 +111,182 @@ onAuthStateChanged(auth, user => {
 //     });
 // }
 
+///////////  наблюдателя состояния аутентификации и получите данные пользователя ///////////////
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    const uid = user.uid;
+    get(child(dbRef, `users/${uid}/`)).then(snapshot => {
+      // console.log(snapshot.val());
+    });
+  } else {
+    // User is signed out
+    // alert('войдите в систему');
+    // ...
+  }
+});
+
+// const analytics = getAnalytics(app);
+
+function writeUserData(userId, ob) {
+  set(ref(database, 'users/' + userId), ob);
+}
+
+function updateData(userId, ob, library, filmId) {
+  update(ref(database, 'users/' + userId + `/${library}/` + filmId), ob);
+}
+
+const dbRef = ref(database);
+
+get(child(dbRef, `users/`)).then(snapshot => {
+  // console.log(snapshot.val());
+  // console.log(snapshot.toJSON());
+});
+
+/////////////////////////////////////////////////////////////////////////
+
+function onSubmitSignin(e) {
+  e.preventDefault();
+  const email = refs.signFormEmail.value;
+  const password = refs.signFormPassword.value;
+  signIn(auth, email, password);
+  refs.signinModal.classList.toggle('is-hidden');
+}
+
+function onSubmitRegist(e) {
+  e.preventDefault();
+  const email = refs.registFormEmail.value;
+  const password = refs.registFormPassword.value;
+  const passwordRepeat = refs.registRepeatFormPassword.value;
+
+  // console.log(email, password);
+  if (password === passwordRepeat) {
+    createUser(auth, email, password);
+    refs.signinModal.classList.toggle('is-hidden');
+  } else {
+    alert('проверь пароль');
+  }
+}
+
+function onClickWatched() {
+  const modalTitle = document.querySelector('.modal__title');
+  const filmId = modalTitle.dataset.id;
+  const user = auth.currentUser;
+  const uid = user.uid;
+  // console.log(uid);
+  fetch(
+    `https://api.themoviedb.org/3/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
+  )
+    .then(response => response.json())
+    .then(data => updateData(uid, data, 'watched', filmId));
+}
+
+function onClickQueue() {
+  const modalTitle = document.querySelector('.modal__title');
+  const filmId = modalTitle.dataset.id;
+  const user = auth.currentUser;
+  const uid = user.uid;
+  // console.log(uid);
+  fetch(
+    `https://api.themoviedb.org/3/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
+  )
+    .then(response => response.json())
+    .then(data => updateData(uid, data, 'queue', filmId));
+}
+
+
+// signIn(auth, 'nana@email.com', 'mypassword');
 // signOutuser(auth, email, password);
+
+
+function loadLibraryPage() {
+  showLibraryHeader();
+  showWatchedData();
+}
+
+function showWatchedData() {
+  refs.queue.classList.remove('library__btn--active');
+  refs.watched.classList.add('library__btn--active');
+  
+  const user = isUserAuthorised();
+  // console.log('user', user.uid);
+  if (!user) {
+    alert('User is signed out')
+    // вызвать функцию открытия модалки регистрации
+    return;
+  };
+  showWatched(user);
+}
+
+function showQueueData() {
+  refs.watched.classList.remove('library__btn--active');
+  refs.queue.classList.add('library__btn--active');
+
+  const user = isUserAuthorised();
+  // console.log('user', user.uid);
+  if (!user) {
+    alert('User is signed out')
+    // вызвать функцию открытия модалки регистрации
+    return;
+  };
+  showQueued(user)
+}
+
+function showLibraryHeader() {
+  refs.homePageHeader.classList.add('is-inactive');
+  refs.libraryPageHeader.classList.remove('is-inactive');
+}
+
+function showHomeHeader() {
+  refs.libraryPageHeader.classList.add('is-inactive');
+  refs.homePageHeader.classList.remove('is-inactive');
+}
+
+function isUserAuthorised() {
+  return auth.currentUser;
+}
+
+function showWatched(user) {
+  
+  const dbRef = ref(getDatabase());
+  get(child(dbRef, `users/${user.uid}/watched/`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      // console.log(snapshot.val());
+      clearFilmGallery();
+      addMarkupGallery(snapshot.val())
+    } else {
+      console.log("No data available");
+      // на экран вывод сообщения, что ничего еще не добавлено
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+
+}
+
+function showQueued(user) {
+  
+  const dbRef = ref(getDatabase());
+  get(child(dbRef, `users/${user.uid}/queue/`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      // console.log(snapshot.val());
+      clearFilmGallery();
+      addMarkupGallery(snapshot.val())
+    } else {
+      console.log("No data available");
+      // на экран вывод сообщения, что ничего еще не добавлено
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+
+}
+
+function clearFilmGallery() {
+  refs.filmGallery.innerHTML = '';
+}
+
+function addMarkupGallery(data) {
+  const dataObj = {results: data};
+  refs.filmGallery.insertAdjacentHTML('beforeend', template(dataObj));
+}

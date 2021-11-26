@@ -7,8 +7,10 @@
       <p class="header__title">Filmoteka</p>
     </a>
     <ul class="header__menu">
-      <li class="header__item active__item home">Home</li>
-      <li class="header__item library">My library</li>
+
+      <li class="header__item header__home-page active__item">Home</li>
+      <li class="header__item header__library-page">My library</li>
+
       <li class="header__item">
         <button class="header__signin header__button" data-signin-open>Sign In</button>
       </li>
@@ -33,8 +35,10 @@
       <p class="header__title">Filmoteka</p>
     </a>
     <ul class="header__menu">
-      <li class="header__item home">Home</li>
-      <li class="header__item active__item library">my library</li>
+
+      <li class="header__item header__home-page">Home</li>
+      <li class="header__item active__item header__library-page">my library</li>
+
       <li class="header__item">
         <button class="header__signin header__button" data-signin-open>Sign In</button>
       </li>
@@ -43,10 +47,10 @@
   
   <ul class="library__list">
     <li class="library__item">
-      <button class="library__btn header__button library__btn--active">Watched</button>
+      <button class="library__btn header__button library__watched library__btn--active">Watched</button>
     </li>
     <li class="library__item">
-      <button class="library__btn header__button">Queue</button>
+      <button class="library__btn library__queue header__button">Queue</button>
     </li>
   </ul>
 </div>
