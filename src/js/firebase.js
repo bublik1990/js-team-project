@@ -1,12 +1,18 @@
 // const email = 'nana@email.com';
 // const password = 'mypassword';
 import template from '../partials/templates/filmCardlist-tmpl.hbs';
-import { toFixCardMarkup } from './markup-service'
-import { spinnerShow, spinnerHide} from './spinner';
-// import appendSearchFilmsMarkup from './home';
+import { toFixCardMarkup } from './markup-service';
+import { spinnerShow, spinnerHide } from './spinner';
+import { appendPopularFilmsMarkup } from './home';
 import { initializeApp } from 'firebase/app';
 // import { getAnalytics } from 'firebase/analytics';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,  onAuthStateChanged} from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth';
 import { getDatabase, ref, set, get, child, update } from 'firebase/database';
 
 const firebaseConfig = {
@@ -30,7 +36,6 @@ const dataCreate = {
   queue: {},
 };
 
-
 const refs = {
   signinModal: document.querySelector('[data-signin-modal]'),
 
@@ -51,15 +56,14 @@ const refs = {
 
   libraryPage: document.querySelector('.header__library-page'),
   homePage: document.querySelector('.header__home-page'),
+  libraryHeaderHomePageButton: document.querySelector('.header__library .header__home-page'),
   libraryPageHeader: document.querySelector('.header__library'),
   homePageHeader: document.querySelector('.header__main'),
   filmGallery: document.querySelector('.film-gallery'),
   watched: document.querySelector('.library__watched'),
   queue: document.querySelector('.library__queue'),
-  body: document.querySelector('body')
+  body: document.querySelector('body'),
 };
-
-
 
 refs.signForm.addEventListener('submit', onSubmitSignin);
 refs.registrationForm.addEventListener('submit', onSubmitRegist);
@@ -69,7 +73,7 @@ refs.queueButton.addEventListener('click', onClickQueue);
 refs.libraryPage.addEventListener('click', loadLibraryPage);
 refs.watched.addEventListener('click', showWatchedData);
 refs.queue.addEventListener('click', showQueueData);
-
+refs.libraryHeaderHomePageButton.addEventListener('click', loadHomePage);
 
 ////////////////// создать пользователя///////////////////////////////////
 
@@ -90,8 +94,7 @@ function createUser(auth, email, password) {
 
 function signIn(auth, email, password) {
   signInWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
-    })
+    .then(userCredential => {})
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -197,14 +200,17 @@ function onClickQueue() {
     .then(data => updateData(uid, data, 'queue', filmId));
 }
 
-
 // signIn(auth, 'nana@email.com', 'mypassword');
 signOutuser(auth, 'nana@email.com', 'mypassword');
-
 
 function loadLibraryPage() {
   showLibraryHeader();
   showWatchedData();
+}
+function loadHomePage() {
+  showHomeHeader();
+  spinnerShow(refs.filmGallery);
+  appendPopularFilmsMarkup();
 }
 
 function showWatchedData() {
@@ -215,10 +221,10 @@ function showWatchedData() {
   const user = isUserAuthorised();
   // console.log('user', user.uid);
   if (!user) {
-    console.log('User is signed out')
-    refs.filmGallery.insertAdjacentHTML('afterbegin', addSignInMessageForWatched())
+    console.log('User is signed out');
+    refs.filmGallery.insertAdjacentHTML('afterbegin', addSignInMessageForWatched());
     return;
-  };
+  }
   showWatched(user);
 }
 
@@ -230,11 +236,11 @@ function showQueueData() {
   const user = isUserAuthorised();
   // console.log('user', user.uid);
   if (!user) {
-    console.log('User is signed out')
-    refs.filmGallery.insertAdjacentHTML('afterbegin', addSignInMessageForQueue())
+    console.log('User is signed out');
+    refs.filmGallery.insertAdjacentHTML('afterbegin', addSignInMessageForQueue());
     return;
-  };
-  showQueue(user)
+  }
+  showQueue(user);
 }
 
 function showLibraryHeader() {
@@ -253,42 +259,43 @@ function isUserAuthorised() {
 
 function showWatched(user) {
   const dbRef = ref(getDatabase());
-  get(child(dbRef, `users/${user.uid}/watched/`)).then((snapshot) => {
-    if (snapshot.exists()) {
-      // console.log(snapshot.val());
-      clearFilmGallery();
-      spinnerShow(refs.filmGallery);
-      addMarkupGallery(snapshot.val())
-      spinnerHide()
-    } else {
-      console.log("No data available");
-      // на экран вывод сообщения, что ничего еще не добавлено
-    }
-  }).catch((error) => {
-    console.error(error);
-  });
-
+  get(child(dbRef, `users/${user.uid}/watched/`))
+    .then(snapshot => {
+      if (snapshot.exists()) {
+        // console.log(snapshot.val());
+        clearFilmGallery();
+        spinnerShow(refs.filmGallery);
+        addMarkupGallery(snapshot.val());
+        spinnerHide();
+      } else {
+        console.log('No data available');
+        // на экран вывод сообщения, что ничего еще не добавлено
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
 }
 
 function showQueue(user) {
-  
   const dbRef = ref(getDatabase());
-  get(child(dbRef, `users/${user.uid}/queue/`)).then((snapshot) => {
-    if (snapshot.exists()) {
-      // console.log(snapshot.val());
-      clearFilmGallery();
-      spinnerShow(refs.filmGallery);
-      
-      addMarkupGallery(snapshot.val())
-      spinnerHide();
-    } else {
-      console.log("No data available");
-      // на экран вывод сообщения, что ничего еще не добавлено
-    }
-  }).catch((error) => {
-    console.error(error);
-  });
+  get(child(dbRef, `users/${user.uid}/queue/`))
+    .then(snapshot => {
+      if (snapshot.exists()) {
+        // console.log(snapshot.val());
+        clearFilmGallery();
+        spinnerShow(refs.filmGallery);
 
+        addMarkupGallery(snapshot.val());
+        spinnerHide();
+      } else {
+        console.log('No data available');
+        // на экран вывод сообщения, что ничего еще не добавлено
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
 }
 
 function clearFilmGallery() {
@@ -296,15 +303,15 @@ function clearFilmGallery() {
 }
 
 function addMarkupGallery(data) {
-  const dataObj = {results: data};
+  const dataObj = { results: data };
   refs.filmGallery.insertAdjacentHTML('beforeend', template(dataObj));
   toFixCardMarkup();
 }
 
 function addSignInMessageForWatched() {
-  return '<li class="login__notification"><p>You should first log in to see watched film list.</p><li>'
+  return '<li class="login__notification"><p>You should first log in to see watched film list.</p><li>';
 }
 
 function addSignInMessageForQueue() {
-  return '<li class="login__notification"><p>You should first log in to see films in queue.</p><li>'
+  return '<li class="login__notification"><p>You should first log in to see films in queue.</p><li>';
 }
