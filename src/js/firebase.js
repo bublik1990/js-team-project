@@ -53,7 +53,8 @@ const refs = {
   homePageHeader: document.querySelector('.header__main'),
   filmGallery: document.querySelector('.film-gallery'),
   watched: document.querySelector('.library__watched'),
-  queue: document.querySelector('.library__queue')
+  queue: document.querySelector('.library__queue'),
+  body: document.querySelector('body')
 };
 
 
@@ -97,19 +98,19 @@ function signIn(auth, email, password) {
 
 //////////// выйти из системы//////////////////////////////////
 
-// function signOutuser(auth, email, password) {
-//   signOut(auth, email, password)
-//     .then(userCredential => {
-//       // Signed in
-//       const user = userCredential.user;
-//       console.log(user);
-//       // ...
-//     })
-//     .catch(error => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//     });
-// }
+function signOutuser(auth, email, password) {
+  signOut(auth, email, password)
+    .then(userCredential => {
+      // Signed in
+      const user = userCredential.user;
+      console.log(user);
+      // ...
+    })
+    .catch(error => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+}
 
 ///////////  наблюдателя состояния аутентификации и получите данные пользователя ///////////////
 
@@ -196,7 +197,7 @@ function onClickQueue() {
 
 
 // signIn(auth, 'nana@email.com', 'mypassword');
-// signOutuser(auth, email, password);
+signOutuser(auth, 'nana@email.com', 'mypassword');
 
 
 function loadLibraryPage() {
@@ -207,12 +208,13 @@ function loadLibraryPage() {
 function showWatchedData() {
   refs.queue.classList.remove('library__btn--active');
   refs.watched.classList.add('library__btn--active');
-  
+  clearFilmGallery();
+
   const user = isUserAuthorised();
   // console.log('user', user.uid);
   if (!user) {
-    alert('User is signed out')
-    // вызвать функцию открытия модалки регистрации
+    console.log('User is signed out')
+    refs.filmGallery.insertAdjacentHTML('afterbegin', addSignInMessageForWatched())
     return;
   };
   showWatched(user);
@@ -221,15 +223,16 @@ function showWatchedData() {
 function showQueueData() {
   refs.watched.classList.remove('library__btn--active');
   refs.queue.classList.add('library__btn--active');
+  clearFilmGallery();
 
   const user = isUserAuthorised();
   // console.log('user', user.uid);
   if (!user) {
-    alert('User is signed out')
-    // вызвать функцию открытия модалки регистрации
+    console.log('User is signed out')
+    refs.filmGallery.insertAdjacentHTML('afterbegin', addSignInMessageForQueue())
     return;
   };
-  showQueued(user)
+  showQueue(user)
 }
 
 function showLibraryHeader() {
@@ -252,7 +255,6 @@ function showWatched(user) {
   get(child(dbRef, `users/${user.uid}/watched/`)).then((snapshot) => {
     if (snapshot.exists()) {
       // console.log(snapshot.val());
-      clearFilmGallery();
       addMarkupGallery(snapshot.val())
     } else {
       console.log("No data available");
@@ -264,13 +266,13 @@ function showWatched(user) {
 
 }
 
-function showQueued(user) {
+function showQueue(user) {
   
   const dbRef = ref(getDatabase());
   get(child(dbRef, `users/${user.uid}/queue/`)).then((snapshot) => {
     if (snapshot.exists()) {
       // console.log(snapshot.val());
-      clearFilmGallery();
+      
       addMarkupGallery(snapshot.val())
     } else {
       console.log("No data available");
@@ -289,4 +291,12 @@ function clearFilmGallery() {
 function addMarkupGallery(data) {
   const dataObj = {results: data};
   refs.filmGallery.insertAdjacentHTML('beforeend', template(dataObj));
+}
+
+function addSignInMessageForWatched() {
+  return '<li class="login__notification"><p>You should first log in to see watched film list.</p><li>'
+}
+
+function addSignInMessageForQueue() {
+  return '<li class="login__notification"><p>You should first log in to see films in queue.</p><li>'
 }
