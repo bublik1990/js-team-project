@@ -1,56 +1,66 @@
 <div class="header__wrap header__main">
-  <nav class="header__nav">
-    <a href="./" class="header__logo"> 
-      <svg class="social__icon" width="20" height="20">
-        <use href="./images/svg/sprite.svg#icon-logo"></use>
-      </svg>
-      <p class="header__title">Filmoteka</p>
-    </a>
-    <ul class="header__menu">
+  <div class="container">
+    <nav class="header__nav">
+      <a href="./" class="header__logo">
+        <svg class="social__icon" width="20" height="20">
+          <use href="./images/svg/sprite.svg#icon-logo"></use>
+        </svg>
+        <p class="header__title">Filmoteka</p>
+      </a>
+      <ul class="header__menu">
+        <li class="header__item header__home-page active__item">Home</li>
+        <li class="header__item header__library-page">My library</li>
 
-      <li class="header__item header__home-page active__item">Home</li>
-      <li class="header__item header__library-page">My library</li>
-
-      <li class="header__item">
-        <button class="header__signin header__button" data-signin-open>Sign In</button>
-      </li>
-    </ul>
-  </nav>
-  <form class="header__form" action="">
-    <input class="header__input" type="text" name="query" placeholder="Поиск фильмов" autocomplete="off">
-    <button aria-label="search button" class="header__submitbtn" type="submit">
-      <svg class="social__icon" width="12" height="12">
-        <use href="./images/svg/sprite.svg#icon-search"></use>
-      </svg>
-    </button>
-  </form> 
+        <li class="header__item">
+          <button class="header__signin header__button" data-signin-open>Sign In</button>
+        </li>
+      </ul>
+    </nav>
+    <form class="header__form" action="">
+      <input
+        class="header__input"
+        type="text"
+        name="query"
+        placeholder="Поиск фильмов"
+        autocomplete="off"
+      />
+      <button aria-label="search button" class="header__submitbtn" type="submit">
+        <svg class="social__icon" width="12" height="12">
+          <use href="./images/svg/sprite.svg#icon-search"></use>
+        </svg>
+      </button>
+    </form>
+  </div>
 </div>
 
 <div class="header__wrap header__library is-inactive">
-  <nav class="header__nav">
-    <a href="./" class="header__logo"> 
-      <svg class="social__icon" width="20" height="20">
-        <use href="./images/svg/sprite.svg#icon-logo"></use>
-      </svg>
-      <p class="header__title">Filmoteka</p>
-    </a>
-    <ul class="header__menu">
+  <div class="container">
+    <nav class="header__nav">
+      <a href="./" class="header__logo">
+        <svg class="social__icon" width="20" height="20">
+          <use href="./images/svg/sprite.svg#icon-logo"></use>
+        </svg>
+        <p class="header__title">Filmoteka</p>
+      </a>
+      <ul class="header__menu">
+        <li class="header__item header__home-page">Home</li>
+        <li class="header__item active__item header__library-page">my library</li>
 
-      <li class="header__item header__home-page">Home</li>
-      <li class="header__item active__item header__library-page">my library</li>
+        <li class="header__item">
+          <button class="header__signin header__button" data-signin-open>Sign In</button>
+        </li>
+      </ul>
+    </nav>
 
-      <li class="header__item">
-        <button class="header__signin header__button" data-signin-open>Sign In</button>
+    <ul class="library__list">
+      <li class="library__item">
+        <button class="library__btn header__button library__watched library__btn--active">
+          Watched
+        </button>
+      </li>
+      <li class="library__item">
+        <button class="library__btn library__queue header__button">Queue</button>
       </li>
     </ul>
-  </nav>
-  
-  <ul class="library__list">
-    <li class="library__item">
-      <button class="library__btn header__button library__watched library__btn--active">Watched</button>
-    </li>
-    <li class="library__item">
-      <button class="library__btn library__queue header__button">Queue</button>
-    </li>
-  </ul>
+  </div>
 </div>
