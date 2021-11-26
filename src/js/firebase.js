@@ -2,7 +2,7 @@
 // const password = 'mypassword';
 import template from '../partials/templates/filmCardlist-tmpl.hbs';
 import { toFixCardMarkup } from './markup-service'
-import { spinnerShow, spinnerHide, galleryRef } from './spinner';
+import { spinnerShow, spinnerHide} from './spinner';
 // import appendSearchFilmsMarkup from './home';
 import { initializeApp } from 'firebase/app';
 // import { getAnalytics } from 'firebase/analytics';
@@ -249,14 +249,12 @@ function isUserAuthorised() {
 }
 
 function showWatched(user) {
-  
   const dbRef = ref(getDatabase());
   get(child(dbRef, `users/${user.uid}/watched/`)).then((snapshot) => {
     if (snapshot.exists()) {
-      console.log(snapshot.val())
       // console.log(snapshot.val());
       clearFilmGallery();
-      spinnerShow();
+      spinnerShow(refs.filmGallery);
       addMarkupGallery(snapshot.val())
       spinnerHide()
     } else {
@@ -276,7 +274,9 @@ function showQueued(user) {
     if (snapshot.exists()) {
       // console.log(snapshot.val());
       clearFilmGallery();
+      spinnerShow(refs.filmGallery);
       addMarkupGallery(snapshot.val())
+      spinnerHide();
     } else {
       console.log("No data available");
       // на экран вывод сообщения, что ничего еще не добавлено
