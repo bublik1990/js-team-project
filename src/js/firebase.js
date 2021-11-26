@@ -1,5 +1,8 @@
-// const email = 'nana@email.com';
-// const password = 'mypassword';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
+const _ = require('lodash');
+const { notice, error } = require('@pnotify/core');
+
 import template from '../partials/templates/filmCardlist-tmpl.hbs';
 import { toFixCardMarkup } from './markup-service';
 import { spinnerShow, spinnerHide } from './spinner';
@@ -153,8 +156,20 @@ get(child(dbRef, `users/`)).then(snapshot => {
 
 function onSubmitSignin(e) {
   e.preventDefault();
+
+  // refs.signFormEmail.classList.remove('incorrectField');
+  // refs.signFormPassword.classList.remove('incorrectField');
+
   const email = refs.signFormEmail.value;
   const password = refs.signFormPassword.value;
+  if (!email || !password) {
+    const numError = notice({
+      text: "Enter correct data",
+      width: '450px',
+      delay: 3500,
+  });
+    return
+  }
   signIn(auth, email, password);
   refs.signinModal.classList.toggle('is-hidden');
 }
@@ -201,7 +216,7 @@ function onClickQueue() {
 }
 
 // signIn(auth, 'nana@email.com', 'mypassword');
-signOutuser(auth, 'nana@email.com', 'mypassword');
+// signOutuser(auth, 'nana@email.com', 'mypassword');
 
 function loadLibraryPage() {
   showLibraryHeader();

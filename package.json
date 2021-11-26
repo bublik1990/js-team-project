@@ -26,6 +26,7 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
-    "firebase": "^9.5.0"
+    "firebase": "^9.5.0",
+    "pnotify": "^5.2.0"
   }
 }
