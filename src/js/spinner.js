@@ -1,6 +1,6 @@
 import spinner from '../partials/templates/spinner-tmpl.hbs';
 
-const galleryRef = document.querySelector('.film-gallery');
+export const galleryRef = document.querySelector('.film-gallery');
 const filmContainer = document.querySelector('.film-container');
 
 export function spinnerShow() {
@@ -14,7 +14,8 @@ export function spinnerHide() {
 }
 
 export function filmModalSpinnerShow() {
-filmContainer.innerHTML = spinner();
-const spinnerRef = document.querySelector('.spinner');
-spinnerRef.classList.add('show');
+  filmContainer.innerHTML = spinner();
+  const spinnerRef = document.querySelector('.spinner');
+  spinnerRef.classList.add('show');
 }
+

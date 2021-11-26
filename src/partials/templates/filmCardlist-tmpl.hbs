@@ -11,6 +11,9 @@
         {{#each this.genre_ids}}
           <li class='film-card__list-item'>{{this}}</li>
         {{/each}}
+        {{#each this.genres}}
+        <li class='film-card__list-item'>{{this.name}}</li>
+        {{/each}}
       </ul>
       <span class='film-card__year'>{{this.release_date}}{{this.first_air_date}}</span>
       <span class='film-card__rating'>{{this.vote_average}}</span>
