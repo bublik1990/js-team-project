@@ -163,12 +163,13 @@ function onSubmitSignin(e) {
   const email = refs.signFormEmail.value;
   const password = refs.signFormPassword.value;
   if (!email || !password) {
-    const numError = notice({
-      text: "Enter correct data",
+    const fieldError = notice({
+      text: "Some field is empty",
       width: '450px',
       delay: 3500,
   });
-    return
+    return;
+    
   }
   signIn(auth, email, password);
   refs.signinModal.classList.toggle('is-hidden');
@@ -179,14 +180,30 @@ function onSubmitRegist(e) {
   const email = refs.registFormEmail.value;
   const password = refs.registFormPassword.value;
   const passwordRepeat = refs.registRepeatFormPassword.value;
-
-  // console.log(email, password);
-  if (password === passwordRepeat) {
-    createUser(auth, email, password);
-    refs.signinModal.classList.toggle('is-hidden');
-  } else {
-    alert('проверь пароль');
+  if (!email || !password || !passwordRepeat) {
+    const fieldError = notice({
+      text: "Some field is empty",
+      width: '450px',
+      delay: 3500,
+    });
+    return;
   }
+  if (password !== passwordRepeat) {
+    const passwordError = notice({
+      text: "Passwords not match",
+      width: '450px',
+      delay: 3500,
+    });
+    return;
+  }
+  createUser(auth, email, password);
+  refs.signinModal.classList.toggle('is-hidden');
+  const succesRegistration = notice({
+    text: "you have successfully registered!",
+    width: '450px',
+    delay: 3500,
+});
+ 
 }
 
 function onClickWatched() {
@@ -199,7 +216,14 @@ function onClickWatched() {
     `https://api.themoviedb.org/3/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
   )
     .then(response => response.json())
-    .then(data => updateData(uid, data, 'watched', filmId));
+    .then(data => updateData(uid, data, 'watched', filmId))
+    .then(data => {
+      const passwordError = notice({
+        text: "Film is added to watched",
+        width: '450px',
+        delay: 3500,
+      });
+    });
 }
 
 function onClickQueue() {
@@ -212,7 +236,14 @@ function onClickQueue() {
     `https://api.themoviedb.org/3/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
   )
     .then(response => response.json())
-    .then(data => updateData(uid, data, 'queue', filmId));
+    .then(data => updateData(uid, data, 'queue', filmId))
+    .then(data => {
+      const passwordError = notice({
+        text: "Film is added to queue",
+        width: '450px',
+        delay: 3500,
+      });
+    });
 }
 
 // signIn(auth, 'nana@email.com', 'mypassword');
@@ -283,8 +314,12 @@ function showWatched(user) {
         addMarkupGallery(snapshot.val());
         spinnerHide();
       } else {
-        console.log('No data available');
-        // на экран вывод сообщения, что ничего еще не добавлено
+        // console.log('No data available');
+        const watchedNotice= notice({
+          text: "You haven't yet any film in watched",
+          width: '450px',
+          delay: 3500,
+        });
       }
     })
     .catch(error => {
@@ -304,8 +339,12 @@ function showQueue(user) {
         addMarkupGallery(snapshot.val());
         spinnerHide();
       } else {
-        console.log('No data available');
-        // на экран вывод сообщения, что ничего еще не добавлено
+        // console.log('No data available');
+        const queuedNotice = notice({
+          text: "You haven't yet any film in queue",
+          width: '450px',
+          delay: 3500,
+        });
       }
     })
     .catch(error => {
