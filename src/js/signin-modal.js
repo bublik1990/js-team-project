@@ -1,4 +1,4 @@
-
+import {isUserAuthorised, signOutOfSystem, clearFilmGallery} from './firebase.js';
 
 const tabs = document.querySelectorAll('.signin__choice li');
 tabs.forEach(tab => tab.addEventListener('click', makeTabActive));
@@ -27,15 +27,27 @@ const refs = {
     closeSignInModalBtn: document.querySelectorAll('[data-signin-close]'),
     signinModal: document.querySelector('[data-signin-modal]'),
     signinModalBackdrop: document.querySelector('.signin-backdrop'),
+    signoutYesBtn: document.querySelector('.signout__yes'),
+    signoutNoBtn: document.querySelector('.signout__no'),
   };
 
   refs.openSignInModalBtn.forEach(el => el.addEventListener('click', toggleModal));
   refs.closeSignInModalBtn.forEach(el => el.addEventListener('click', toggleModal));
   refs.signinModalBackdrop.addEventListener('click', onBackdropClick);
+  refs.signoutYesBtn.addEventListener('click', logOut);
+  refs.signoutNoBtn.addEventListener('click', toggleModal);
 
 function toggleModal() {
+  const isUser = isUserAuthorised();
+
+  if (isUser) {
+    showSignoutPanel();
+  } else {
+    showSigninPanel();
+  }
   refs.signinModal.classList.toggle('is-hidden');
   if (refs.signinModal.classList.contains('is-hidden')) resetForms();
+
 }
 
 // Закрытие окна регистрации по клику вне окна
@@ -58,4 +70,25 @@ function onEscClick(el) {
 function resetForms() {
   document.querySelector('#signin').reset();
   document.querySelector('#registration').reset()
+}
+
+function showSigninPanel() {
+  document.querySelector('.signin__wrap').classList.remove('is-hidden');
+  document.querySelector('.signout__wrap').classList.add('is-hidden');
+}
+
+function showSignoutPanel() {
+  document.querySelector('.signin__wrap').classList.add('is-hidden');
+  document.querySelector('.signout__wrap').classList.remove('is-hidden');
+}
+
+function logOut() {
+  signOutOfSystem();
+  setTimeout(() => {
+    toggleModal();
+    clearFilmGallery();
+  }, 1000);
+  
+  
+
 }

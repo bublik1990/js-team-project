@@ -6,63 +6,76 @@
       </svg>
     </button>
 
-    <ul class="signin__choice">
-      <li class="signin__tab active-tab" data-tab="signin">SignIn</li>
-      <li class="registration__tab" data-tab="registration">Registration</li>
-    </ul>
-
-    <div class="form__container">
-      <form name="signin-form" class="signin__form" id="signin">
-        <label class="signin__field">
-          <span class="signin__label">Email</span>
-          <span class="signin__input-wrap">
-            <input class="signin__input" type="email" name="email" id="sign-email" />
-          </span>
-        </label>
-
-        <label class="signin__field">
-          <span class="signin__label">Password</span>
-          <span class="signin__input-wrap">
-            <input class="signin__input" type="password" name="password" id="sign-password" />
-          </span>
-        </label>
-
-        <button class="signin__button" aria-label="Submit" type="submit" id="sign-button">
-          Sign In
-        </button>
-      </form>
-
-      <form name="registration-form" class="visually-hidden signin__form" id="registration">
-        <label class="signin__field">
-          <span class="signin__label">Email</span>
-          <span class="signin__input-wrap">
-            <input class="signin__input" type="email" name="email" id="regist-email" />
-          </span>
-        </label>
-
-        <label class="signin__field">
-          <span class="signin__label">Password</span>
-          <span class="signin__input-wrap">
-            <input class="signin__input" type="password" name="password" id="regist-password" />
-          </span>
-        </label>
-
-        <label class="signin__field">
-          <span class="signin__label">Repeat Password</span>
-          <span class="signin__input-wrap">
-            <input
-              class="signin__input"
-              type="password"
-              name="repeat-password"
-              id="registRepeat-password"
-            />
-          </span>
-        </label>
-
-        <button class="signin__button" aria-label="Submit" type="submit" id="regist-button">
-          Register
-        </button>
-      </form>
+    <div class="signin__wrap ">
+      <ul class="signin__choice">
+        <li class="signin__tab active-tab" data-tab="signin">SignIn</li>
+        <li class="registration__tab" data-tab="registration">Registration</li>
+      </ul>
+  
+      <div class="form__container">
+        <form name="signin-form" class="signin__form" id="signin">
+          <label class="signin__field">
+            <span class="signin__label">Email</span>
+            <span class="signin__input-wrap">
+              <input class="signin__input" type="email" name="email" id="sign-email" autocomplete="on"/>
+            </span>
+          </label>
+  
+          <label class="signin__field">
+            <span class="signin__label">Password</span>
+            <span class="signin__input-wrap">
+              <input class="signin__input" type="password" name="password" id="sign-password" autocomplete="on"/>
+            </span>
+          </label>
+  
+          <button class="signin__button" aria-label="Submit" type="submit" id="sign-button">
+            Sign In
+          </button>
+        </form>
+  
+        <form name="registration-form" class="visually-hidden signin__form" id="registration">
+          <label class="signin__field">
+            <span class="signin__label">Email</span>
+            <span class="signin__input-wrap">
+              <input class="signin__input" type="email" name="email" id="regist-email" autocomplete="on"/>
+            </span>
+          </label>
+  
+          <label class="signin__field">
+            <span class="signin__label">Password</span>
+            <span class="signin__input-wrap">
+              <input class="signin__input" type="password" name="password" id="regist-password" autocomplete="on"/>
+            </span>
+          </label>
+  
+          <label class="signin__field">
+            <span class="signin__label">Repeat Password</span>
+            <span class="signin__input-wrap">
+              <input
+                class="signin__input"
+                type="password"
+                name="repeat-password"
+                id="registRepeat-password"
+                autocomplete="on"
+              />
+            </span>
+          </label>
+  
+          <button class="signin__button" aria-label="Submit" type="submit" id="regist-button">
+            Register
+          </button>
+        </form>
+      </div>
     </div>
+
+    <div class="signout__wrap is-hidden">
+
+      <p class="signout__text">Are you sure you want to log out?</p>
+      <ul class="signout__choice">
+        <li class="signout__item"><button class="signout__button signout__yes">Yes</button></li>
+        <li class="signout__item"><button class="signout__button signout__no">No</button></li>
+      </ul>
+    </div>
+    
   </div>
 </div>

@@ -41,6 +41,8 @@ const dataCreate = {
 
 const refs = {
   signinModal: document.querySelector('[data-signin-modal]'),
+  signInButton: document.querySelectorAll('[data-signin-open]'),
+  // signOutButton: document.querySelector('.header__signout'),
 
   signForm: document.querySelector('#signin'),
   signFormEmail: document.querySelector('#sign-email'),
@@ -78,6 +80,7 @@ refs.watched.addEventListener('click', showWatchedData);
 refs.queue.addEventListener('click', showQueueData);
 refs.libraryHeaderHomePageButton.addEventListener('click', loadHomePage);
 
+
 ////////////////// создать пользователя///////////////////////////////////
 
 function createUser(auth, email, password) {
@@ -106,8 +109,8 @@ function signIn(auth, email, password) {
 
 //////////// выйти из системы//////////////////////////////////
 
-function signOutuser(auth, email, password) {
-  signOut(auth, email, password)
+function signOutuser(auth, email) {
+  signOut(auth, email)
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
@@ -118,6 +121,18 @@ function signOutuser(auth, email, password) {
       const errorCode = error.code;
       const errorMessage = error.message;
     });
+}
+
+
+function signOutOfSystem() {
+  const user = auth.currentUser;
+  signOutuser(auth, user.email);
+  const fieldError = notice({
+    text: "You are logged out.",
+    width: '450px',
+    delay: 3500,
+});
+
 }
 
 ///////////  наблюдателя состояния аутентификации и получите данные пользователя ///////////////
@@ -173,6 +188,11 @@ function onSubmitSignin(e) {
   }
   signIn(auth, email, password);
   refs.signinModal.classList.toggle('is-hidden');
+  const succesLogin = notice({
+    text: "You have log in!",
+    width: '450px',
+    delay: 3500,
+  });
 }
 
 function onSubmitRegist(e) {
@@ -199,10 +219,10 @@ function onSubmitRegist(e) {
   createUser(auth, email, password);
   refs.signinModal.classList.toggle('is-hidden');
   const succesRegistration = notice({
-    text: "you have successfully registered!",
+    text: "You have successfully registered!",
     width: '450px',
     delay: 3500,
-});
+  });
  
 }
 
@@ -248,8 +268,10 @@ function onClickQueue() {
 
 // signIn(auth, 'nana@email.com', 'mypassword');
 // signOutuser(auth, 'nana@email.com', 'mypassword');
+// signOutuser(auth, 'ju@gmail.com');
 
 function loadLibraryPage() {
+  // switchSignInButton()
   showLibraryHeader();
   showWatchedData();
 }
@@ -280,7 +302,6 @@ function showQueueData() {
   clearFilmGallery();
 
   const user = isUserAuthorised();
-  // console.log('user', user.uid);
   if (!user) {
     console.log('User is signed out');
     refs.filmGallery.insertAdjacentHTML('afterbegin', addSignInMessageForQueue());
@@ -369,3 +390,49 @@ function addSignInMessageForWatched() {
 function addSignInMessageForQueue() {
   return '<li class="login__notification"><p>You should first log in to see films in queue.</p><li>';
 }
+
+// async function switchSignInButton() {
+//   const user = await isUserAuthorised();
+//   if (user) {
+//     hideSignInButtonInHomePage();
+//     showSignOutButtonInHomePage();
+//   } else {
+//     showSignInButtonInHomePage();
+//     hideSignOutButtonInHomePage();
+//   }
+// }
+
+// function hideSignInButtonInHomePage() {
+//   document.querySelectorAll('.header__signin-btn').forEach(el => el.classList.add('is-inactive'));
+// }
+
+// function showSignInButtonInHomePage() {
+//   document.querySelectorAll('.header__signin-btn').forEach(el => el.classList.remove('is-inactive'));
+// }
+
+// function hideSignOutButtonInHomePage() {
+//   document.querySelectorAll('.header__signout-btn').forEach(el => el.classList.add('is-inactive'));
+// }
+
+// function showSignOutButtonInHomePage() {
+//   document.querySelectorAll('.header__signout-btn').forEach(el => el.classList.remove('is-inactive'));
+// }
+
+//  window.onload = async function() {
+//    try{
+//     const user = await isUserAuthorised();
+//     await console.log(user)
+//     // switchSignInButton()
+//    } catch {
+//     console.log(555)
+//    }
+//   // await console.log(auth.currentUser)
+//   //  setTimeout(() => {
+//   //    console.log(auth.currentUser)
+//   //   }, 2000)
+//   // await switchSignInButton()
+
+// };
+
+
+export {isUserAuthorised, signOutOfSystem, clearFilmGallery}

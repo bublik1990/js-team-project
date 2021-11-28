@@ -156,6 +156,37 @@ button.signin__input {
     }
 }
 
-.incorrectField {
-    border-color: red;
+.signout__text {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
 }
+
+.signout__choice {
+    display: flex;
+    justify-content: center;
+}
+
+.signout__item:not(:first-child) {
+    margin-left: 15px;
+}
+
+.signout__button {
+    margin-top: 30px;
+    width: 70px;
+    height: 44px;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #ff6b08;
+    transition: color 0.3s, background 0.3s;
+    border: 1px solid #ff6b08;
+    cursor: pointer;
+    font-size: 18px;
+    
+    &:hover,
+    &:focus {
+        background-color: #d85700;
+        
+    }
+}
+
