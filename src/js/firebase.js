@@ -6,7 +6,7 @@ const { notice, error } = require('@pnotify/core');
 import template from '../partials/templates/filmCardlist-tmpl.hbs';
 import { toFixCardMarkup } from './markup-service';
 import { spinnerShow, spinnerHide } from './spinner';
-import { appendPopularFilmsMarkup } from './home';
+import { appendPopularFilmsMarkup, hiddenErrorMes } from './home';
 import { initializeApp } from 'firebase/app';
 // import { getAnalytics } from 'firebase/analytics';
 import {
@@ -255,6 +255,7 @@ function loadLibraryPage() {
 }
 function loadHomePage() {
   showHomeHeader();
+  hiddenErrorMes();
   spinnerShow(refs.filmGallery);
   appendPopularFilmsMarkup();
 }

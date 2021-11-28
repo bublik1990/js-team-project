@@ -7,10 +7,7 @@ const API = new fetchFilms();
 
 const galleryRef = document.querySelector('.film-gallery');
 const searchFormRef = document.querySelector('.header__form');
-const headerHomeBox = document.querySelector('.header__main');
-const headerHomeBtn = document.querySelectorAll('.header__item.home')
-const headerLibraryBox = document.querySelector('.header__library');
-const headerLibraryBtn =document.querySelectorAll('.header__item.library')
+const searchErrorMes = document.querySelector('.header__search-error');
 
 
 export function clearGalleryMarkup() {
@@ -32,6 +29,7 @@ async function onSearch(e) {
 
   if (!searchQuery) {
     // ----- Ошибка, если запрос пустой
+    searchErrorMes.classList.remove('is-hidden');
     return;
   }
   //удаляет старый масив фильмов если пользователь ищет новые
@@ -50,6 +48,7 @@ async function collectFilms(form, searchQuery) {
 
   API.query = searchQuery;
   clearGalleryMarkup();
+  hiddenErrorMes();
   spinnerShow(galleryRef);
   const filmsCollection = await API.getSearchFilms();
   //пушу колекцию 
@@ -72,10 +71,20 @@ function createPagMrkp() {
   const list = document.querySelector(".pag-ul");
   list.innerHTML = createPagination(arrayOfMovies.length - 1, 1, list);
   addListenerToPag(arrayOfMovies.length - 1, 1, list)
+
+  searchErrorMes.classList.add('is-hidden');
+
+  // ----- Пришла одна страница, спрятать пагинацию
+  // if (filmsCollection.total_pages === 1) {
+  // }
 }
 // ----- Заполняет разметку фильмами из поиска
 function appendSearchFilmsMarkup(arrayOfMovies) {
   galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[0]);
+}
+
+export function hiddenErrorMes() {
+  searchErrorMes.classList.add('is-hidden');
 }
 
 // ----- Слушатель на кнопке поиска
@@ -199,3 +208,4 @@ function addListenerToPag(totalPages, page, list) {
     }
   })
 }
+
