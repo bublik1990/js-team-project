@@ -1,0 +1,74 @@
+.pagination {
+  padding-bottom: 120px;
+}
+.pagination__container {
+  display: flex;
+  justify-content: center;
+}
+.pag-ul {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.numb {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+}
+.numb:hover {
+  transition: 0.3s;
+  background: #ff6b08;
+  color: white;
+}
+.numb,
+.dots {
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  margin: 0;
+  margin-right: 10px;
+
+  padding: 3px;
+}
+
+.dots {
+  display: flex;
+  align-items: flex-start;
+  height: 40px;
+  width: 40px;
+  cursor: default;
+}
+.prev,
+.next {
+  width: 40px;
+  height: 40px;
+  background: #f7f7f7;
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.prev > svg,
+.next > svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.prev:hover,
+.next:hover {
+  background: #ff6b08;
+  transition: 0.3s;
+}
+.next:hover path,
+.prev:hover path {
+  stroke: #fff;
+  transition: 0.3s;
+}
+.active {
+  background: #ff6b08;
+  color: #fff;
+}
