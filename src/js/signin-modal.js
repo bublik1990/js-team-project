@@ -1,3 +1,5 @@
+
+
 const tabs = document.querySelectorAll('.signin__choice li');
 tabs.forEach(tab => tab.addEventListener('click', makeTabActive));
 
@@ -33,12 +35,14 @@ const refs = {
 
 function toggleModal() {
   refs.signinModal.classList.toggle('is-hidden');
+  if (refs.signinModal.classList.contains('is-hidden')) resetForms();
 }
 
 // Закрытие окна регистрации по клику вне окна
 function onBackdropClick(el) {
   if (el.currentTarget === el.target) {
     refs.signinModal.classList.add('is-hidden');
+    resetForms();
   }
 }
 
@@ -46,6 +50,12 @@ function onBackdropClick(el) {
 function onEscClick(el) {
     if (el.key === 'Escape') {
       refs.signinModal.classList.add('is-hidden');
+      resetForms();
     }
   };
   window.addEventListener('keyup', onEscClick);
+
+function resetForms() {
+  document.querySelector('#signin').reset();
+  document.querySelector('#registration').reset()
+}

@@ -150,3 +150,19 @@
 .is-inactive {
   display: none;
 }
+
+.header__search-error {
+  width: 280px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: left;
+  margin-top: 22px;
+  font-size: 14px;
+  line-height: 1.14;
+  color: #FF001B;
+
+  @media screen and (min-width: 768px) {
+    width: 395px;
+    text-align: center;
+  }
+}
