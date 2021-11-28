@@ -93,25 +93,25 @@ searchFormRef.addEventListener('submit', (e) => {
     onSearch(e);
 })
 
-// ----- Слушатель на кнопке Home
-for (let i = 0; i < headerHomeBtn.length; i++) {
-  headerHomeBtn[i].addEventListener('click', () => {
-    headerLibraryBox.classList.add('is-inactive');
-    headerHomeBox.classList.remove('is-inactive');
-    clearGalleryMarkup();
-    spinnerShow(galleryRef);
-    appendPopularFilmsMarkup();
-  })
-}
+// // ----- Слушатель на кнопке Home
+// for (let i = 0; i < headerHomeBtn.length; i++) {
+//   headerHomeBtn[i].addEventListener('click', () => {
+//     headerLibraryBox.classList.add('is-inactive');
+//     headerHomeBox.classList.remove('is-inactive');
+//     clearGalleryMarkup();
+//     spinnerShow(galleryRef);
+//     appendPopularFilmsMarkup();
+//   })
+// }
 
-// ----- Слушатель на кнопке Library
-for (let i = 0; i < headerLibraryBtn.length; i++) {
-  headerLibraryBtn[i].addEventListener('click', () => {
-    headerHomeBox.classList.add('is-inactive');
-    headerLibraryBox.classList.remove('is-inactive');
-    clearGalleryMarkup();
-  })
-}
+// // ----- Слушатель на кнопке Library
+// for (let i = 0; i < headerLibraryBtn.length; i++) {
+//   headerLibraryBtn[i].addEventListener('click', () => {
+//     headerHomeBox.classList.add('is-inactive');
+//     headerLibraryBox.classList.remove('is-inactive');
+//     clearGalleryMarkup();
+//   })
+// }
 
 function createPagination(totalPages, page, list) {
   page = Number(page)
