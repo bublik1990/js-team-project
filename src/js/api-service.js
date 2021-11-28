@@ -18,7 +18,7 @@ export default class fetchFilms {
         const response = await fetch(`${API_URL}/search/movie?api_key=${ANATOLII_API_KEY}&language=en-US&query=${this.searchQuery}&page=${this.page}&include_adult=false`);
         const filmsCollection = response.json();
         this.incrementPage();
-
+        
         return filmsCollection;
     }
 
@@ -28,6 +28,10 @@ export default class fetchFilms {
 
     resetPage() {
         this.page = 1;
+    }
+
+    returnPage() {
+        return this.page
     }
 
     get query() {
