@@ -6,10 +6,7 @@ const API = new fetchFilms();
 
 const galleryRef = document.querySelector('.film-gallery');
 const searchFormRef = document.querySelector('.header__form');
-const headerHomeBox = document.querySelector('.header__main');
-const headerHomeBtn = document.querySelectorAll('.header__item.home')
-const headerLibraryBox = document.querySelector('.header__library');
-const headerLibraryBtn =document.querySelectorAll('.header__item.library')
+const searchErrorMes = document.querySelector('.header__search-error');
 
 
 export function clearGalleryMarkup() {
@@ -29,16 +26,20 @@ async function onSearch(e) {
 
   if (!searchQuery) {
     // ----- Ошибка, если запрос пустой
+    searchErrorMes.classList.remove('is-hidden');
     return;
   }
 
   API.resetPage();
   API.query = searchQuery;
   clearGalleryMarkup();
+  hiddenErrorMes();
   spinnerShow(galleryRef);
   const filmsCollection = await API.getSearchFilms();
   appendSearchFilmsMarkup(filmsCollection);
   toFixCardMarkup();
+
+  searchErrorMes.classList.add('is-hidden');
 
   // ----- Пришла одна страница, спрятать пагинацию
   // if (filmsCollection.total_pages === 1) {
@@ -50,28 +51,12 @@ function appendSearchFilmsMarkup(filmsCollection) {
   galleryRef.innerHTML = filmCardTpl(filmsCollection);
 }
 
+export function hiddenErrorMes() {
+  searchErrorMes.classList.add('is-hidden');
+}
+
 // ----- Слушатель на кнопке поиска
 searchFormRef.addEventListener('submit', (e) => {
     e.preventDefault();
     onSearch(e);
 })
-
-// ----- Слушатель на кнопке Home
-for (let i = 0; i < headerHomeBtn.length; i++) {
-  headerHomeBtn[i].addEventListener('click', () => {
-    headerLibraryBox.classList.add('is-inactive');
-    headerHomeBox.classList.remove('is-inactive');
-    clearGalleryMarkup();
-    spinnerShow(galleryRef);
-    appendPopularFilmsMarkup();
-  })
-}
-
-// ----- Слушатель на кнопке Library
-for (let i = 0; i < headerLibraryBtn.length; i++) {
-  headerLibraryBtn[i].addEventListener('click', () => {
-    headerHomeBox.classList.add('is-inactive');
-    headerLibraryBox.classList.remove('is-inactive');
-    clearGalleryMarkup();
-  })
-}
