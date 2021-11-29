@@ -8,7 +8,7 @@ const API = new fetchFilms();
 const galleryRef = document.querySelector('.film-gallery');
 const searchFormRef = document.querySelector('.header__form');
 const searchErrorMes = document.querySelector('.header__search-error');
-
+const pagContainer = document.querySelector('.pagination__container')
 
 export function clearGalleryMarkup() {
   galleryRef.innerHTML = '';
@@ -67,11 +67,11 @@ async function collectFilms(form, searchQuery) {
     return 
   }
 }
+
+const list = document.querySelector(".pag-ul");
 function createPagMrkp() {
-  const list = document.querySelector(".pag-ul");
   list.innerHTML = createPagination(arrayOfMovies.length - 1, 1, list);
   addListenerToPag(arrayOfMovies.length - 1, 1, list)
-
   searchErrorMes.classList.add('is-hidden');
 
   // ----- Пришла одна страница, спрятать пагинацию
@@ -93,25 +93,33 @@ searchFormRef.addEventListener('submit', (e) => {
     onSearch(e);
 })
 
-// // ----- Слушатель на кнопке Home
-// for (let i = 0; i < headerHomeBtn.length; i++) {
-//   headerHomeBtn[i].addEventListener('click', () => {
-//     headerLibraryBox.classList.add('is-inactive');
-//     headerHomeBox.classList.remove('is-inactive');
-//     clearGalleryMarkup();
-//     spinnerShow(galleryRef);
-//     appendPopularFilmsMarkup();
-//   })
-// }
+const headerHomeBtn = document.querySelector('.header__home-page')
 
-// // ----- Слушатель на кнопке Library
-// for (let i = 0; i < headerLibraryBtn.length; i++) {
-//   headerLibraryBtn[i].addEventListener('click', () => {
-//     headerHomeBox.classList.add('is-inactive');
-//     headerLibraryBox.classList.remove('is-inactive');
-//     clearGalleryMarkup();
-//   })
-// }
+// ----- Слушатель на кнопке Home
+for (let i = 0; i < headerHomeBtn.length; i++) {
+  headerHomeBtn[i].addEventListener('click', () => {
+    headerLibraryBox.classList.add('is-inactive');
+    headerHomeBox.classList.remove('is-inactive');
+    clearGalleryMarkup();
+    spinnerShow(galleryRef);
+    appendPopularFilmsMarkup();
+  })
+}
+
+const headerLibraryBtn = document.querySelector('.header__library-page')
+
+headerLibraryBtn.addEventListener('click', () => {
+  list.innerHTML = ''
+})
+
+// ----- Слушатель на кнопке Library
+for (let i = 0; i < headerLibraryBtn.length; i++) {
+  headerLibraryBtn[i].addEventListener('click', () => {
+    headerHomeBox.classList.add('is-inactive');
+    headerLibraryBox.classList.remove('is-inactive');
+    clearGalleryMarkup();
+  })
+}
 
 function createPagination(totalPages, page, list) {
   page = Number(page)
@@ -128,18 +136,36 @@ function createPagination(totalPages, page, list) {
 </li>`;
   }
 
-  if (page > 2) { //if page value is less than 2 then add 1 after the previous button
+  if (page > 3) { //if page value is less than 2 then add 1 after the previous button
     liTag += `<li class="first numb"><span>1</span></li>`;
     if (page > 3) { //if page value is greater than 3 then add this (...) after the first li or page
       liTag += `<li class="dots">...</li>`;
     }
   }
-  // how many pages or li show before the current li
+  // // how many pages or li show before the current li
+  // if (page == totalPages) {
+  //   beforePage = beforePage + 1;
+  //   console.log(beforePage);
+  // }
+ // how many pages or li show before the current li
   if (page == totalPages) {
-    beforePage = beforePage - 1;
-    console.log(beforePage);
-  }
 
+    beforePage = beforePage - 2;
+  }
+      if (totalPages == 1) {
+        beforePage = 0;
+    }
+  if (page == totalPages - 1) {
+
+    beforePage = beforePage - 1;
+  }
+      if (totalPages == 2) {
+      beforePage = 1
+    }
+  // else if (page == 1) {
+  //   console.log(page);
+  //   beforePage = 0;
+  // }
   // how many pages or li show after the current li
   if (page == 1) {
     afterPage = afterPage + 2;
@@ -148,6 +174,10 @@ function createPagination(totalPages, page, list) {
 
     afterPage = afterPage + 1;
   }
+  // else if (page == 3) {
+  //   afterPage = afterPage
+  // }
+
   for (var plength = beforePage; plength <= afterPage; plength++) {
 
     if (plength > totalPages) { //if plength is greater than totalPage length then continue
@@ -163,7 +193,7 @@ function createPagination(totalPages, page, list) {
     }
     liTag += `<li class="numb ${active}"><span>${plength}</span></li>`;
   }
-  if(page < totalPages - 1){ //if page value is less than totalPage value by -1 then show the last li or page
+  if(page < totalPages - 2){ //if page value is less than totalPage value by -1 then show the last li or page
     if(page < totalPages - 2){ //if page value is less than totalPage value by -2 then add this (...) before the last li or page
       liTag += `<li class="dots">...</li>`;
     }
@@ -204,8 +234,10 @@ function addListenerToPag(totalPages, page, list) {
   if (e.target.parentNode.classList.contains('numb')) {
     createPagination(totalPages, e.target.innerHTML, list)
     page = Number(e.target.innerHTML);
+    console.log(page);
     galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[page]);
     }
   })
+  
 }
 

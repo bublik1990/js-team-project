@@ -1,5 +1,6 @@
 .pagination {
-  padding-bottom: 120px;
+  padding: 0;
+  padding-bottom: 60px;
 }
 .pagination__container {
   display: flex;
@@ -51,6 +52,9 @@
   cursor: pointer;
   transition: 0.3s;
 }
+.prev {
+  margin-right: 10px;
+}
 .prev > svg,
 .next > svg {
   position: absolute;
@@ -69,6 +73,7 @@
   transition: 0.3s;
 }
 .active {
+  pointer-events: none;
   background: #ff6b08;
   color: #fff;
 }
