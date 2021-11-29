@@ -53,6 +53,8 @@ li {
   margin-top: 5px;
   margin-bottom: 0px;
   display: flex;
+  flex-wrap: wrap;
+  // flex-basis: ;
   align-items: center;
 }
 .film-card__list-item:not(:last-child) {
@@ -61,7 +63,9 @@ li {
     content: ',';
     margin-left: 2px;
   }
+  
 }
+
 .film-card__meta {
   display: flex;
   color: #ff6b08;
