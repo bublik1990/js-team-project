@@ -136,36 +136,26 @@ function createPagination(totalPages, page, list) {
 </li>`;
   }
 
-  if (page > 3) { //if page value is less than 2 then add 1 after the previous button
-    liTag += `<li class="first numb"><span>1</span></li>`;
+  if (page > 2) { //if page value is less than 2 then add 1 after the previous button
+    liTag += `<li class="first numb">1</li>`;
     if (page > 3) { //if page value is greater than 3 then add this (...) after the first li or page
       liTag += `<li class="dots">...</li>`;
     }
   }
-  // // how many pages or li show before the current li
-  // if (page == totalPages) {
-  //   beforePage = beforePage + 1;
-  //   console.log(beforePage);
-  // }
- // how many pages or li show before the current li
-  if (page == totalPages) {
 
-    beforePage = beforePage - 2;
-  }
-      if (totalPages == 1) {
-        beforePage = 0;
+    if (page == totalPages) {
+      beforePage = beforePage - 2;
     }
-  if (page == totalPages - 1) {
-
-    beforePage = beforePage - 1;
-  }
-      if (totalPages == 2) {
+    if (totalPages == 1) {
+      beforePage = 0;
+    }
+    if (page == totalPages - 1) {
+      beforePage = beforePage - 1;
+    }
+    if (totalPages == 2) {
       beforePage = 1
     }
-  // else if (page == 1) {
-  //   console.log(page);
-  //   beforePage = 0;
-  // }
+
   // how many pages or li show after the current li
   if (page == 1) {
     afterPage = afterPage + 2;
@@ -191,13 +181,13 @@ function createPagination(totalPages, page, list) {
     }else{ //else leave empty to the active variable
       active = "";
     }
-    liTag += `<li class="numb ${active}"><span>${plength}</span></li>`;
+    liTag += `<li class="numb ${active}">${plength}</li>`;
   }
-  if(page < totalPages - 2){ //if page value is less than totalPage value by -1 then show the last li or page
+  if(page < totalPages - 1){ //if page value is less than totalPage value by -1 then show the last li or page
     if(page < totalPages - 2){ //if page value is less than totalPage value by -2 then add this (...) before the last li or page
       liTag += `<li class="dots">...</li>`;
     }
-    liTag += `<li class="last numb"><span>${totalPages}</span></li>`;
+    liTag += `<li class="last numb">${totalPages}</li>`;
   }
   if (page < totalPages) { //show the next button if the page value is less than totalPage(20)
       liTag += `<li class="next"><svg id="next-svg" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -213,25 +203,25 @@ function createPagination(totalPages, page, list) {
 
 function addListenerToPag(totalPages, page, list) {
  page = Number(page)
- 
+  
   list.addEventListener('click', (e) => {
-    if (e.target.parentNode.id == 'next-svg') {
+  if (e.target.className == 'next') {
     createPagination(totalPages, page += 1, list)
     galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[page]);
     }
-  if (e.target.parentNode.className == 'next') {
+  if (e.target.id == 'next-svg') {
     createPagination(totalPages, page += 1, list)
     galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[page]);
     }
-    if (e.target.parentNode.id == 'prev-svg') {
+  if (e.target.id == 'prev-svg') {
     createPagination(totalPages, page -= 1, list)
     galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[page]);
     }
-  if (e.target.parentNode.className == 'prev') {
+  if (e.target.className == 'prev') {
     createPagination(totalPages, page -= 1, list)
     galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[page]);
     } 
-  if (e.target.parentNode.classList.contains('numb')) {
+  if (e.target.classList.contains('numb')) {
     createPagination(totalPages, e.target.innerHTML, list)
     page = Number(e.target.innerHTML);
     console.log(page);
