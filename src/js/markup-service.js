@@ -41,6 +41,9 @@ function tvGenreCompiler() {
         ) {
           genre.innerHTML = genre.textContent.slice(0, 6);
         }
+        if (genre.textContent === 'TV Movie') {
+          genre.innerHTML = 'TV';
+        }
       });
     });
 }
