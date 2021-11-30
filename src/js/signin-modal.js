@@ -29,6 +29,10 @@ const refs = {
     signinModalBackdrop: document.querySelector('.signin-backdrop'),
     signoutYesBtn: document.querySelector('.signout__yes'),
     signoutNoBtn: document.querySelector('.signout__no'),
+    signInform: document.querySelector('#signin'),
+    registrationForm: document.querySelector('#registration'),
+    signInBlock: document.querySelector('.signin__wrap'),
+    signOutBlock: document.querySelector('.signout__wrap'),
   };
 
   refs.openSignInModalBtn.forEach(el => el.addEventListener('click', toggleModal));
@@ -68,18 +72,18 @@ function onEscClick(el) {
   window.addEventListener('keyup', onEscClick);
 
 function resetForms() {
-  document.querySelector('#signin').reset();
-  document.querySelector('#registration').reset()
+  refs.signInform.reset();
+  registrationForm.reset()
 }
 
 function showSigninPanel() {
-  document.querySelector('.signin__wrap').classList.remove('is-hidden');
-  document.querySelector('.signout__wrap').classList.add('is-hidden');
+  refs.signInBlock.classList.remove('is-hidden');
+  refs.signOutBlock.classList.add('is-hidden');
 }
 
 function showSignoutPanel() {
-  document.querySelector('.signin__wrap').classList.add('is-hidden');
-  document.querySelector('.signout__wrap').classList.remove('is-hidden');
+  refs.signInBlock.classList.add('is-hidden');
+  refs.signOutBlock.classList.remove('is-hidden');
 }
 
 function logOut() {
@@ -87,8 +91,6 @@ function logOut() {
   setTimeout(() => {
     toggleModal();
     clearFilmGallery();
-  }, 1000);
-  
-  
+  }, 1000); 
 
 }

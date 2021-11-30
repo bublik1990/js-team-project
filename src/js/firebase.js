@@ -403,47 +403,4 @@ function addSignInMessageForQueue() {
   return '<li class="login__notification"><p>You should first log in to see films in queue.</p><li>';
 }
 
-// async function switchSignInButton() {
-//   const user = await isUserAuthorised();
-//   if (user) {
-//     hideSignInButtonInHomePage();
-//     showSignOutButtonInHomePage();
-//   } else {
-//     showSignInButtonInHomePage();
-//     hideSignOutButtonInHomePage();
-//   }
-// }
-
-// function hideSignInButtonInHomePage() {
-//   document.querySelectorAll('.header__signin-btn').forEach(el => el.classList.add('is-inactive'));
-// }
-
-// function showSignInButtonInHomePage() {
-//   document.querySelectorAll('.header__signin-btn').forEach(el => el.classList.remove('is-inactive'));
-// }
-
-// function hideSignOutButtonInHomePage() {
-//   document.querySelectorAll('.header__signout-btn').forEach(el => el.classList.add('is-inactive'));
-// }
-
-// function showSignOutButtonInHomePage() {
-//   document.querySelectorAll('.header__signout-btn').forEach(el => el.classList.remove('is-inactive'));
-// }
-
-//  window.onload = async function() {
-//    try{
-//     const user = await isUserAuthorised();
-//     await console.log(user)
-//     // switchSignInButton()
-//    } catch {
-//     console.log(555)
-//    }
-//   // await console.log(auth.currentUser)
-//   //  setTimeout(() => {
-//   //    console.log(auth.currentUser)
-//   //   }, 2000)
-//   // await switchSignInButton()
-
-// };
-
 export { isUserAuthorised, signOutOfSystem, clearFilmGallery };
