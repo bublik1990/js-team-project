@@ -1,15 +1,15 @@
-const openTeamModalLink = document.querySelector('.footer__content-link');
-const closeTeamModalBtn = document.querySelector('.js-team-modal-close');
-const teamModal = document.querySelector('.js-team-backdrop');
+import getRefs from './refs'
+const refs = getRefs();
 
-openTeamModalLink.addEventListener('click', onOpenTeamModal);
-closeTeamModalBtn.addEventListener('click', onCloseTeamModal);
+
+refs.openTeamModalLink.addEventListener('click', onOpenTeamModal);
+refs.closeTeamModalBtn.addEventListener('click', onCloseTeamModal);
 
 function onOpenTeamModal(e) {
   e.preventDefault();
-  teamModal.classList.remove('team-backdrop--is-hidden');
+  refs.teamModal.classList.remove('team-backdrop--is-hidden');
   window.addEventListener('keydown', onEscBtnPress);
-  teamModal.addEventListener('click', onTeamBackdropClick);
+  refs.teamModal.addEventListener('click', onTeamBackdropClick);
   if (!e.target.classList.contains('team-modal')) {
     return;
   }
@@ -17,8 +17,8 @@ function onOpenTeamModal(e) {
 
 function onCloseTeamModal(e) {
   window.removeEventListener('keydown', onEscBtnPress);
-  teamModal.removeEventListener('click', onTeamBackdropClick);
-  teamModal.classList.add('team-backdrop--is-hidden');
+  refs.teamModal.removeEventListener('click', onTeamBackdropClick);
+  refs.teamModal.classList.add('team-backdrop--is-hidden');
 }
 
 function onTeamBackdropClick(e) {

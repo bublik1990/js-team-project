@@ -17,6 +17,8 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { getDatabase, ref, set, get, child, update } from 'firebase/database';
+import getRefs from './refs'
+const refs = getRefs();
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBvTCDF7Yn__K0ODa3ZNhNXrSGOBWBdHcQ',
@@ -37,37 +39,6 @@ const auth = getAuth();
 const dataCreate = {
   watched: {},
   queue: {},
-};
-
-const refs = {
-  signinModal: document.querySelector('[data-signin-modal]'),
-  signInButton: document.querySelectorAll('[data-signin-open]'),
-  // signOutButton: document.querySelector('.header__signout'),
-
-  signForm: document.querySelector('#signin'),
-  signFormEmail: document.querySelector('#sign-email'),
-  signFormPassword: document.querySelector('#sign-password'),
-  signFormButton: document.querySelector('#sign-button'),
-
-  registrationForm: document.querySelector('#registration'),
-  registFormEmail: document.querySelector('#regist-email'),
-  registFormPassword: document.querySelector('#regist-password'),
-  registRepeatFormPassword: document.querySelector('#registRepeat-password'),
-  registFormButton: document.querySelector('#regist-button'),
-
-  watchedButton: document.querySelector('.modal__button--watched'),
-  queueButton: document.querySelector('.modal__button--queue'),
-  filmId: document.querySelector('.modal__title'),
-
-  libraryPage: document.querySelector('.header__library-page'),
-  homePage: document.querySelector('.header__home-page'),
-  libraryHeaderHomePageButton: document.querySelector('.header__library .header__home-page'),
-  libraryPageHeader: document.querySelector('.header__library'),
-  homePageHeader: document.querySelector('.header__main'),
-  filmGallery: document.querySelector('.film-gallery'),
-  watched: document.querySelector('.library__watched'),
-  queue: document.querySelector('.library__queue'),
-  body: document.querySelector('body'),
 };
 
 refs.signForm.addEventListener('submit', onSubmitSignin);
@@ -229,7 +200,7 @@ function onClickWatched() {
     const uid = user.uid;
 
     fetch(
-      `https://api.themoviedb.org/3/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
+      `${refs.API_URL}/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
     )
       .then(response => response.json())
       .then(data => updateData(uid, data, 'watched', filmId))
@@ -257,7 +228,7 @@ function onClickQueue() {
   if (user) {
     const uid = user.uid;
     fetch(
-      `https://api.themoviedb.org/3/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
+      `${refs.API_URL}/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
     )
       .then(response => response.json())
       .then(data => updateData(uid, data, 'queue', filmId))
