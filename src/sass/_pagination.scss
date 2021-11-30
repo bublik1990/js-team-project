@@ -19,8 +19,8 @@
 }
 .numb:hover {
   transition: 0.3s;
-  background: #ff6b08;
-  color: white;
+  background: var(--aiming-color);
+  color: var(--main-background-color);
 }
 .numb,
 .dots {
@@ -46,7 +46,7 @@
 .next {
   width: 40px;
   height: 40px;
-  background: #f7f7f7;
+  background: var(--main-background-color);
   border-radius: 5px;
   position: relative;
   cursor: pointer;
@@ -64,16 +64,16 @@
 }
 .prev:hover,
 .next:hover {
-  background: #ff6b08;
+  background: var(--aiming-color);
   transition: 0.3s;
 }
 .next:hover path,
 .prev:hover path {
-  stroke: #fff;
+  stroke: var(--main-background-color);
   transition: 0.3s;
 }
 .active {
   pointer-events: none;
-  background: #ff6b08;
-  color: #fff;
+  background: var(--aiming-color);
+  color: var(--main-background-color);
 }

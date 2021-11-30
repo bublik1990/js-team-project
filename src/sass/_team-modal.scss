@@ -1,12 +1,3 @@
-ul {
-  list-style: none;
-  padding-inline-start: 0;
-}
-
-img {
-  display: block;
-}
-
 .team-backdrop {
   position: fixed;
   top: 0;
@@ -15,7 +6,7 @@ img {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 1;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 250ms var(--cubic);
   padding: 60px 0px;
   overflow-y: scroll;
 
@@ -38,7 +29,7 @@ img {
   padding-left: 25px;
   padding-right: 25px;
   width: 320px;
-  background-color: #ffffff;
+  background-color: var(--main-background-color);
   transition: transform 250ms linear;
   border-radius: 4px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
@@ -74,7 +65,7 @@ img {
     margin-top: 30px;
   }
 
-  background-color: #f7f7f7;
+  background-color: var(--main-background-color);
   text-align: center;
   border-radius: 0px 0px 4px 4px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
@@ -91,12 +82,6 @@ img {
   }
 }
 
-.modal__close-image {
-  width: 16px;
-  height: 16px;
-  fill: #545454;
-}
-
 .team-modal__button {
   position: absolute;
   display: flex;
@@ -104,7 +89,7 @@ img {
   align-items: center;
   background-color: transparent;
   border-radius: 50%;
-  border-color: #545454;
+  border-color: var(--modal-border-color);
   border-width: 1px;
   border-style: solid;
   top: 8px;
@@ -116,9 +101,9 @@ img {
   &:hover,
   &:focus {
     // fill: #ff6b08;
-    border-color: #ff6b08;
+    border-color: var(--aiming-color);
     .modal__close-image {
-      fill: #ff6b08;
+      fill: var(--aiming-color);
     }
   }
 
@@ -140,26 +125,33 @@ img {
   line-height: 1.172;
   letter-spacing: 0.03em;
   margin-bottom: 10px;
-  color: #545454;
+  color: var(--modal-border-color);
 }
 
-.sl__list {
+.modal__close-image {
+  width: 16px;
+  height: 16px;
+  fill: var(--modal-border-color);
+}
+
+.sl {
+  &__list {
   display: flex;
   justify-content: center;
   fill: #afb1b8;
 }
 
-.sl__item:not(:last-child) {
+  &__item:not(:last-child) {
   margin-right: 10px;
 }
 
-.sl__logo {
+  &__logo {
   width: 20px;
   height: 20px;
   fill: inherit;
 }
 
-.sl__link {
+  &__link {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -173,7 +165,8 @@ img {
 
   &:hover,
   &:focus {
-    background-color: #ff6b08;
-    fill: #fff;
+    background-color: var(--aiming-color);
+    fill: var(--main-background-color);
   }
+}
 }
