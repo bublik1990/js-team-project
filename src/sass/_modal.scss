@@ -256,7 +256,7 @@
   cursor: pointer;
   &:hover,
   &:focus {
-    color: var(--aiming-color)var(--aiming-color);
+    color: var(--aiming-color);
     border: 1px solid var(--aiming-color);
     box-shadow: 4px -1px 14px 4px rgb(255 107 8 / 50%);
     transition: box-shadow 250ms ease;

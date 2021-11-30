@@ -214,7 +214,7 @@ function onClickWatched() {
   } else {
     notice({
       text: 'Login or register',
-      width: '450px',
+      width: '300px',
       delay: 3500,
     });
   }
@@ -242,7 +242,7 @@ function onClickQueue() {
   } else {
     notice({
       text: 'Login or register',
-      width: '450px',
+      width: '300px',
       delay: 3500,
     });
   }
