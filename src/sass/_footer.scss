@@ -61,7 +61,7 @@
 
   &:hover,
   &:focus {
-    color: #ff6b08;
+    color: var(--aiming-color);
     text-shadow: 1px 1px 2px rgba($color: #ff6b08, $alpha: 0.3);
   }
 }
