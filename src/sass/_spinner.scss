@@ -1,8 +1,8 @@
 .spinner.show {
   width: 50px;
   height: 50px;
-  border: 5px solid black;
-  border-bottom-color: #ff6b08;
+  border: 5px solid var(--black-color);
+  border-bottom-color: var(--aiming-color);
   border-radius: 50%;
   display: inline-block;
   margin-left: auto;

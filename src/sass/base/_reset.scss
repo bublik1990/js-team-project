@@ -1,8 +1,4 @@
-:root {
-    --cubic: cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  html {
+html {
     box-sizing: border-box;
   }
   
@@ -24,6 +20,12 @@
     margin: 0;
     padding: 0;
   }
+
+  li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
   
   a {
     text-decoration: none;
@@ -37,6 +39,11 @@
   h6,
   p {
     margin: 0;
+    padding: 0;
+  }
+
+  img {
+    display: block;
   }
   
   input {
