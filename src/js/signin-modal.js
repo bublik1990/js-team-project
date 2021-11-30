@@ -61,7 +61,7 @@ function onEscClick(el) {
 
 function resetForms() {
   refs.signInform.reset();
-  registrationForm.reset()
+  refs.registrationForm.reset()
 }
 
 function showSigninPanel() {
