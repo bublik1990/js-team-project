@@ -8,6 +8,10 @@ import { toFixCardMarkup } from './markup-service';
 import { spinnerShow, spinnerHide } from './spinner';
 import { appendPopularFilmsMarkup, hiddenErrorMes } from './home';
 import { initializeApp } from 'firebase/app';
+import filmCardTpl from '../partials/templates/filmCardlist-onSearch-tmpl.hbs'
+import { createPagination } from './pagination.js';
+// import { addListenerToLibraryPag } from './pagination.js';
+
 // import { getAnalytics } from 'firebase/analytics';
 import {
   getAuth,
@@ -307,16 +311,25 @@ function isUserAuthorised() {
   return auth.currentUser;
 }
 
+let arrayOfMovies = []
+
 function showWatched(user) {
   const dbRef = ref(getDatabase());
   get(child(dbRef, `users/${user.uid}/watched/`))
     .then(snapshot => {
       if (snapshot.exists()) {
+          pageNum = 1
+      
         // console.log(snapshot.val());
         clearFilmGallery();
         spinnerShow(refs.filmGallery);
-        addMarkupGallery(snapshot.val());
+        // addMarkupGallery(snapshot.val());
         spinnerHide();
+        arrayOfMovies = []
+        arrayOfMovies = Object.values(snapshot.val());
+        paginate(snapshot.val())
+        // addListenerToLibraryPag(arrayOfMovies, totalPages, pageNum, list)
+
       } else {
         // console.log('No data available');
         const watchedNotice = notice({
@@ -331,6 +344,70 @@ function showWatched(user) {
     });
 }
 
+const list = document.querySelector(".pag-ul");
+
+let pageNum = 1
+let filmsOnPage = 20;
+let totalPages = 0;
+
+function paginate(data) {
+  arrayOfMovies = Object.values(data);
+  let start = (pageNum - 1) * filmsOnPage;
+  if (start < 0) {
+    start = 0
+  }
+  let end = start + filmsOnPage;
+  let notes = arrayOfMovies.slice(start, end)
+  addMarkupLibrary(notes)
+  if (arrayOfMovies.length > 19) {
+    totalPages = Math.ceil(arrayOfMovies.length / 20)
+  } else {
+    totalPages = 0;
+  }
+  list.innerHTML = ''
+  list.innerHTML = createPagination(totalPages, pageNum, list);
+
+}
+
+
+list.addEventListener('click', (e) => {
+  addListener(e, pageNum, totalPages, arrayOfMovies)
+})
+
+function addListener(e, page, totalPages, arrayOfMovies) {
+    if (e.target.className == 'next') {
+      refs.filmGallery.innerHTML = ''
+      pageNum += 1
+      paginate(arrayOfMovies);
+      createPagination(totalPages, page += 1, list)
+    }
+  if (e.target.id == 'next-svg') {
+      refs.filmGallery.innerHTML = ''
+      pageNum += 1
+      paginate(arrayOfMovies);
+      createPagination(totalPages, page += 1, list)
+    }
+  if (e.target.id == 'prev-svg') {
+    refs.filmGallery.innerHTML = ''
+    pageNum -= 1
+    paginate(arrayOfMovies);
+    createPagination(totalPages, page -= 1, list)
+   }
+  if (e.target.className == 'prev') {
+    refs.filmGallery.innerHTML = ''
+    pageNum -= 1
+    paginate(arrayOfMovies);
+    createPagination(totalPages, page -= 1, list)
+    } 
+  if (e.target.classList.contains('numb')) {
+    page = Number(e.target.innerHTML);
+    refs.filmGallery.innerHTML = ''
+    pageNum = page
+    paginate(arrayOfMovies);
+    createPagination(totalPages, page, list)
+    }
+}
+  
 function showQueue(user) {
   const dbRef = ref(getDatabase());
   get(child(dbRef, `users/${user.uid}/queue/`))
@@ -339,8 +416,10 @@ function showQueue(user) {
         // console.log(snapshot.val());
         clearFilmGallery();
         spinnerShow(refs.filmGallery);
-
-        addMarkupGallery(snapshot.val());
+        arrayOfMovies = []
+        arrayOfMovies = Object.values(snapshot.val());
+        pageNum = 1
+        paginate(snapshot.val())
         spinnerHide();
       } else {
         // console.log('No data available');
@@ -363,6 +442,11 @@ function clearFilmGallery() {
 function addMarkupGallery(data) {
   const dataObj = { results: data };
   refs.filmGallery.insertAdjacentHTML('beforeend', template(dataObj));
+  toFixCardMarkup();
+}
+
+function addMarkupLibrary(data) {
+  refs.filmGallery.insertAdjacentHTML('beforeend', filmCardTpl(data));
   toFixCardMarkup();
 }
 
