@@ -1,39 +1,46 @@
-<img
-  class='modal__img'
-  src='https://image.tmdb.org/t/p/w500{{this.poster_path}}'
-  alt='{{this.original_title}}'
-/>
+{{#if this.poster_path}}
+  <img
+    class='modal__img'
+    src='https://image.tmdb.org/t/p/w500{{this.poster_path}}'
+    alt='{{this.original_title}}'
+  />
+{{/if}}
+{{#unless this.poster_path}}
+  <div class='modal__img backup-modal'>
+    <p class='backup-warning'>&#128711</p>
+  </div>
+{{/unless}}
 <div>
-<h2 class='modal__title' data-id='{{this.id}}'>{{this.original_title}} </h2>
+  <h2 class='modal__title' data-id='{{this.id}}'>{{this.original_title}} </h2>
 
-<table class='modal__table'>
-  <tr class='modal__table--row'>
-    <td class='modal__table--caption'>Vote / Votes</td>
-    <td class='modal__table--data'>
-      <span class='modal__table--vote'>{{this.vote_average}}</span>
-      /
-      {{this.vote_count}}
-    </td>
-  </tr>
-  <tr class='modal__table--row'>
-    <td class='modal__table--caption'>Popularity</td>
-    <td class='modal__table--data'>{{this.popularity}}</td>
-  </tr>
-  <tr class='modal__table--row'>
-    <td class='modal__table--caption'>Original Title</td>
-    <td class='modal__table--data'>{{this.original_title}}</td>
-  </tr>
-  <tr class='modal__table--row'>
-    <td class='modal__table--caption last_data'>Genre</td>
+  <table class='modal__table'>
+    <tr class='modal__table--row'>
+      <td class='modal__table--caption'>Vote / Votes</td>
+      <td class='modal__table--data'>
+        <span class='modal__table--vote'>{{this.vote_average}}</span>
+        /
+        {{this.vote_count}}
+      </td>
+    </tr>
+    <tr class='modal__table--row'>
+      <td class='modal__table--caption'>Popularity</td>
+      <td class='modal__table--data'>{{this.popularity}}</td>
+    </tr>
+    <tr class='modal__table--row'>
+      <td class='modal__table--caption'>Original Title</td>
+      <td class='modal__table--data'>{{this.original_title}}</td>
+    </tr>
+    <tr class='modal__table--row'>
+      <td class='modal__table--caption last_data'>Genre</td>
       <td class='modal__table--data last_data'>
-        {{#each this.genres}} 
-        {{this.name}}
+        {{#each this.genres}}
+          {{this.name}}
         {{/each}}</td>
-  </tr>
-</table>
+    </tr>
+  </table>
 
-<h3 class='modal__text--title'>ABOUT</h3>
+  <h3 class='modal__text--title'>ABOUT</h3>
 
-<p class='modal__text'>{{this.overview}}
-</p>
+  <p class='modal__text'>{{this.overview}}
+  </p>
 </div>

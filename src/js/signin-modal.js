@@ -1,7 +1,8 @@
+import { isUserAuthorised, signOutOfSystem, clearFilmGallery } from './firebase.js';
+import getRefs from './refs'
+const refs = getRefs();
 
-
-const tabs = document.querySelectorAll('.signin__choice li');
-tabs.forEach(tab => tab.addEventListener('click', makeTabActive));
+refs.tabs.forEach(tab => tab.addEventListener('click', makeTabActive));
 
 function makeTabActive(event) {
     const tab = event.currentTarget;
@@ -22,20 +23,23 @@ function makeTabActive(event) {
 
 }
 
-const refs = {
-    openSignInModalBtn: document.querySelectorAll('[data-signin-open]'),
-    closeSignInModalBtn: document.querySelectorAll('[data-signin-close]'),
-    signinModal: document.querySelector('[data-signin-modal]'),
-    signinModalBackdrop: document.querySelector('.signin-backdrop'),
-  };
-
   refs.openSignInModalBtn.forEach(el => el.addEventListener('click', toggleModal));
   refs.closeSignInModalBtn.forEach(el => el.addEventListener('click', toggleModal));
   refs.signinModalBackdrop.addEventListener('click', onBackdropClick);
+  refs.signoutYesBtn.addEventListener('click', logOut);
+  refs.signoutNoBtn.addEventListener('click', toggleModal);
 
 function toggleModal() {
+  const isUser = isUserAuthorised();
+
+  if (isUser) {
+    showSignoutPanel();
+  } else {
+    showSigninPanel();
+  }
   refs.signinModal.classList.toggle('is-hidden');
   if (refs.signinModal.classList.contains('is-hidden')) resetForms();
+
 }
 
 // Закрытие окна регистрации по клику вне окна
@@ -56,6 +60,25 @@ function onEscClick(el) {
   window.addEventListener('keyup', onEscClick);
 
 function resetForms() {
-  document.querySelector('#signin').reset();
-  document.querySelector('#registration').reset()
+  refs.signInform.reset();
+  refs.registrationForm.reset()
+}
+
+function showSigninPanel() {
+  refs.signInBlock.classList.remove('is-hidden');
+  refs.signOutBlock.classList.add('is-hidden');
+}
+
+function showSignoutPanel() {
+  refs.signInBlock.classList.add('is-hidden');
+  refs.signOutBlock.classList.remove('is-hidden');
+}
+
+function logOut() {
+  signOutOfSystem();
+  setTimeout(() => {
+    toggleModal();
+    clearFilmGallery();
+  }, 1000); 
+
 }

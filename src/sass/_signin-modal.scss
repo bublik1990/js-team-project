@@ -1,4 +1,10 @@
-.signin-backdrop {
+.form__container {
+    margin-top: 30px;
+}
+
+.signin {
+
+  &-backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,18 +17,18 @@
 
     padding: 90px 15px;
     overflow-y: scroll;
-}
+  }
 
-.signin__modal {
+&__modal {
     width: 320px;
     padding: 20px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
-    background-color: #ffffff;
-    color: #071666;
-    box-shadow: 0px 0px 19px 3px #ff6b08;
+    background-color: var(--main-background-color);
+    color: var(--signin-modal-color);
+    box-shadow: 0px 0px 19px 3px var(--aiming-color);
     border-radius: 5px;
 
     @media screen and (min-width: 768px) {
@@ -31,13 +37,13 @@
 
 }
 
-.signin__choice {
+&__choice {
     display: flex;
     margin: 0px 30px;
     font-size: 20px;
 }
 
-.signin__choice li {
+&__choice li {
     width: 50%; 
     padding-top: 10px;
     padding-bottom: 10px;
@@ -47,44 +53,29 @@
 
     &:hover,
     &:focus {
-        color: #ff6b08;
+        color: var(--aiming-color);
         &::after {
-            background-color: #ff6b08;
+            background-color: var(--aiming-color);
         }
     }
     
 }
 
-
-.form__container {
-    margin-top: 30px;
-}
-
-.signin__form label {
+&__form label {
     display: block;
 }
 
-.active-tab::after {
-    width: 100%;
-    height: 2px; 
-    display: block;
-    position: absolute;
-    bottom: 0; 
-    background-color: #071666; 
-    content: "";
-}
-
-.signin__label {
+&__label {
     display: block;
 }
 
-.signin__input-wrap {
+&__input-wrap {
     display: block;
     width: 100%;
     margin-top: 5px;
 }
 
-.signin__input {
+&__input {
     width: 100%;
     height: 42px;
     padding-left: 10px;
@@ -98,15 +89,12 @@
         border: 2px solid #c7c7c7;
     }
 }
-button.signin__input {
-    margin-top: 20px;
-}
 
-.signin__field:not(:first-child) {
+&__field:not(:first-child) {
     margin-top: 5px;
 }
 
-.signin__modal-closeBtn {
+&__modal-closeBtn {
     padding: 0;
     transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
     position: absolute;
@@ -115,7 +103,7 @@ button.signin__input {
     align-items: center;
     background-color: transparent;
     border-radius: 50%;
-    border-color: #545454;
+    border-color: var(--modal-border-color);
     border-width: 1px;
     border-style: solid;
     top: 8px;
@@ -127,35 +115,82 @@ button.signin__input {
 
     &:hover,
     &:focus {
-        border-color: #ff6b08;
+        border-color: var(--aiming-color);
         .modal__close-image {
-        fill: #ff6b08;
+        fill: var(--aiming-color);
         }
     }
   }
 
-.signin__button {
+&__button {
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
     display: block;
     width: 100%;
     height: 44px;
-    color: #fff;
+    color: var(--main-background-color);
     border-radius: 5px;
-    background-color: #ff6b08;
+    background-color: var(--aiming-color);
     transition: color 0.3s, background 0.3s;
-    border: 1px solid #ff6b08;
+    border: 1px solid var(--aiming-color);
     cursor: pointer;
     font-size: 21px;
     
     &:hover,
     &:focus {
-        background-color: #d85700;
+        background-color: var(--signin-modal-bgcolor);
         
     }
 }
+}
 
-.incorrectField {
-    border-color: red;
+button.signin__input {
+    margin-top: 20px;
+}
+
+.active-tab::after {
+    width: 100%;
+    height: 2px; 
+    display: block;
+    position: absolute;
+    bottom: 0; 
+    background-color: var(--signin-modal-color); 
+    content: "";
+}
+
+.signout {
+  &__text {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &__choice {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__item:not(:first-child) {
+    margin-left: 15px;
+  }
+
+  &__button {
+    margin-top: 30px;
+    width: 70px;
+    height: 44px;
+    color: var(--main-background-color);
+    border-radius: 5px;
+    background-color: var(--aiming-color);
+    transition: color 0.3s, background 0.3s;
+    border: 1px solid var(--aiming-color);
+    cursor: pointer;
+    font-size: 18px;
+    
+    &:hover,
+    &:focus {
+        background-color: var(--signin-modal-bgcolor);
+        
+    }
+  }
 }

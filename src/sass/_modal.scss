@@ -9,7 +9,13 @@
   z-index: 99;
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 1;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 250ms var(--cubic);
+}
+
+.film-container {
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
 }
 
 .is-hidden {
@@ -31,7 +37,7 @@
   top: 75%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1);
-  background-color: #ffff;
+  background-color: var(--main-background-color);
 
   @media screen and (min-width: 768px) {
     width: 618px;
@@ -55,15 +61,8 @@
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
   }
-}
 
-.film-container {
-  @media screen and (min-width: 768px) {
-    display: flex;
-  }
-}
-
-.modal__closebtn {
+&__closebtn {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -75,15 +74,22 @@
   height: 30px;
   border: none;
   cursor: pointer;
-  color: #000000;
+  color: var(--black-color);
   background-color: transparent;
   background-image: url('../images/svg/icon-close.svg');
   background-position: center;
   background-size: 60%;
   background-repeat: no-repeat;
-  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: fill 250ms var(--cubic);
+  &:hover,
+  &:focus {
+    fill: var(--aiming-color);
+    border-radius: 50%;
+    box-shadow: 4px -1px 14px 4px rgb(255 107 8 / 50%);
+    transition: box-shadow 250ms ease;
+  }
 }
-.modal__img {
+&__img {
   width: 240px;
   height: 356.57px;
   border-radius: 5px;
@@ -104,7 +110,7 @@
   }
 }
 
-.modal__title {
+&__title {
   margin-top: 0;
   margin-bottom: 20px;
   font-family: Roboto;
@@ -112,19 +118,19 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 1.15;
-  color: #000000;
+  color: var(--black-color);
 
   @media screen and (min-width: 1024px) {
     font-size: 30px;
     line-height: 1.16;
   }
 }
+}
 
 .modal__table {
   margin-bottom: 20px;
-}
 
-.modal__table--caption {
+&--caption {
   padding-right: 40px;
   padding-bottom: 10px;
   font-family: Roboto;
@@ -135,39 +141,36 @@
   color: #8c8c8c;
 }
 
-.modal__table--data {
+&--data {
   padding-bottom: 10px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
-  color: #000000;
+  color: var(--black-color);
 }
 
-.last_data {
-  padding-bottom: 0;
-}
-
-.modal__table--vote {
+&--vote {
   display: inline-table;
   text-align: center;
   align-items: center;
   width: 36px;
   height: 16px;
-  background: #ff6b01;
+  background: var(--aiming-color);
   border-radius: 5px;
-  color: #ffffff;
+  color: var(--main-background-color);
 }
 
-.modal__table--votes {
+&--votes {
   display: inline-table;
   text-align: center;
   align-items: center;
   width: 36px;
   height: 16px;
-  background: #f7f7f7;
+  background: var(--main-background-color);
   border-radius: 5px;
+}
 }
 
 .modal__text--title {
@@ -178,7 +181,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
-  color: #000000;
+  color: var(--black-color);
 }
 
 .modal__text {
@@ -189,22 +192,22 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.6;
-  color: #000000;
+  color: var(--black-color);
 }
 
 .modal__button {
   display: flex;
   @media screen and (min-width: 768px) {
-    position: absolute;
-    bottom: 40px;
-    right: 45px;
+    margin-left: 279px;
   }
   @media screen and (min-width: 1024px) {
+    margin-left: 0;
+    position: absolute;
+    bottom: 40px;
     right: 215px;
   }
-}
 
-.modal__button--watched {
+&--watched {
   margin-top: 0;
   padding: 0;
   text-transform: uppercase;
@@ -214,14 +217,19 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  color: #ffffff;
+  color: var(--main-background-color);
   width: 112.58px;
   height: 44px;
-  background: #ff6b01;
-  border: 1px solid #ff6b01;
+  background: var(--aiming-color);
+  border: 1px solid var(--aiming-color);
   border-radius: 5px;
-  border-color: #ff6b01;
+  border-color: var(--aiming-color);
   cursor: pointer;
+  &:hover,
+  &:focus {
+    box-shadow: 4px -1px 14px 4px rgb(255 107 8 / 50%);
+    transition: box-shadow 250ms ease;
+  }
   @media screen and (min-width: 768px) {
     width: 125px;
   }
@@ -231,21 +239,28 @@
   }
 }
 
-.modal__button--queue {
+&--queue {
   text-transform: uppercase;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  color: #000000;
-  background-color: #ffffff;
+  color: var(--black-color);
+  background-color: var(--main-background-color);
   width: 112.58px;
   height: 44px;
-  border: 1px solid #000000;
+  border: 1px solid var(--black-color);
   box-sizing: border-box;
   border-radius: 5px;
   cursor: pointer;
+  &:hover,
+  &:focus {
+    color: var(--aiming-color);
+    border: 1px solid var(--aiming-color);
+    box-shadow: 4px -1px 14px 4px rgb(255 107 8 / 50%);
+    transition: box-shadow 250ms ease;
+  }
 
   @media screen and (min-width: 768px) {
     width: 125px;
@@ -253,4 +268,9 @@
   @media screen and (min-width: 1024px) {
     width: 136px;
   }
+}
+}
+
+.last_data {
+  padding-bottom: 0;
 }

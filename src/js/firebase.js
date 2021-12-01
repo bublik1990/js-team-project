@@ -21,6 +21,8 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { getDatabase, ref, set, get, child, update } from 'firebase/database';
+import getRefs from './refs'
+const refs = getRefs();
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBvTCDF7Yn__K0ODa3ZNhNXrSGOBWBdHcQ',
@@ -41,35 +43,6 @@ const auth = getAuth();
 const dataCreate = {
   watched: {},
   queue: {},
-};
-
-const refs = {
-  signinModal: document.querySelector('[data-signin-modal]'),
-
-  signForm: document.querySelector('#signin'),
-  signFormEmail: document.querySelector('#sign-email'),
-  signFormPassword: document.querySelector('#sign-password'),
-  signFormButton: document.querySelector('#sign-button'),
-
-  registrationForm: document.querySelector('#registration'),
-  registFormEmail: document.querySelector('#regist-email'),
-  registFormPassword: document.querySelector('#regist-password'),
-  registRepeatFormPassword: document.querySelector('#registRepeat-password'),
-  registFormButton: document.querySelector('#regist-button'),
-
-  watchedButton: document.querySelector('.modal__button--watched'),
-  queueButton: document.querySelector('.modal__button--queue'),
-  filmId: document.querySelector('.modal__title'),
-
-  libraryPage: document.querySelector('.header__library-page'),
-  homePage: document.querySelector('.header__home-page'),
-  libraryHeaderHomePageButton: document.querySelector('.header__library .header__home-page'),
-  libraryPageHeader: document.querySelector('.header__library'),
-  homePageHeader: document.querySelector('.header__main'),
-  filmGallery: document.querySelector('.film-gallery'),
-  watched: document.querySelector('.library__watched'),
-  queue: document.querySelector('.library__queue'),
-  body: document.querySelector('body'),
 };
 
 refs.signForm.addEventListener('submit', onSubmitSignin);
@@ -110,8 +83,8 @@ function signIn(auth, email, password) {
 
 //////////// выйти из системы//////////////////////////////////
 
-function signOutuser(auth, email, password) {
-  signOut(auth, email, password)
+function signOutuser(auth, email) {
+  signOut(auth, email)
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
@@ -122,6 +95,16 @@ function signOutuser(auth, email, password) {
       const errorCode = error.code;
       const errorMessage = error.message;
     });
+}
+
+function signOutOfSystem() {
+  const user = auth.currentUser;
+  signOutuser(auth, user.email);
+  const fieldError = notice({
+    text: 'You are logged out.',
+    width: '450px',
+    delay: 3500,
+  });
 }
 
 ///////////  наблюдателя состояния аутентификации и получите данные пользователя ///////////////
@@ -168,15 +151,19 @@ function onSubmitSignin(e) {
   const password = refs.signFormPassword.value;
   if (!email || !password) {
     const fieldError = notice({
-      text: "Some field is empty",
+      text: 'Some field is empty',
       width: '450px',
       delay: 3500,
-  });
+    });
     return;
-    
   }
   signIn(auth, email, password);
   refs.signinModal.classList.toggle('is-hidden');
+  const succesLogin = notice({
+    text: 'You have log in!',
+    width: '450px',
+    delay: 3500,
+  });
 }
 
 function onSubmitRegist(e) {
@@ -186,7 +173,7 @@ function onSubmitRegist(e) {
   const passwordRepeat = refs.registRepeatFormPassword.value;
   if (!email || !password || !passwordRepeat) {
     const fieldError = notice({
-      text: "Some field is empty",
+      text: 'Some field is empty',
       width: '450px',
       delay: 3500,
     });
@@ -194,7 +181,7 @@ function onSubmitRegist(e) {
   }
   if (password !== passwordRepeat) {
     const passwordError = notice({
-      text: "Passwords not match",
+      text: 'Passwords not match',
       width: '450px',
       delay: 3500,
     });
@@ -203,57 +190,74 @@ function onSubmitRegist(e) {
   createUser(auth, email, password);
   refs.signinModal.classList.toggle('is-hidden');
   const succesRegistration = notice({
-    text: "you have successfully registered!",
+    text: 'You have successfully registered!',
     width: '450px',
     delay: 3500,
-});
- 
+  });
 }
 
 function onClickWatched() {
   const modalTitle = document.querySelector('.modal__title');
   const filmId = modalTitle.dataset.id;
   const user = auth.currentUser;
-  const uid = user.uid;
-  // console.log(uid);
-  fetch(
-    `https://api.themoviedb.org/3/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
-  )
-    .then(response => response.json())
-    .then(data => updateData(uid, data, 'watched', filmId))
-    .then(data => {
-      const passwordError = notice({
-        text: "Film is added to watched",
-        width: '450px',
-        delay: 3500,
+  if (user) {
+    const uid = user.uid;
+
+    fetch(
+      `${refs.API_URL}/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
+    )
+      .then(response => response.json())
+      .then(data => updateData(uid, data, 'watched', filmId))
+      .then(data => {
+        const passwordError = notice({
+          text: 'Film is added to watched',
+          width: '450px',
+          delay: 3500,
+        });
       });
+  } else {
+    notice({
+      text: 'Login or register',
+      width: '300px',
+      delay: 3500,
     });
+  }
 }
 
 function onClickQueue() {
   const modalTitle = document.querySelector('.modal__title');
   const filmId = modalTitle.dataset.id;
   const user = auth.currentUser;
-  const uid = user.uid;
-  // console.log(uid);
-  fetch(
-    `https://api.themoviedb.org/3/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
-  )
-    .then(response => response.json())
-    .then(data => updateData(uid, data, 'queue', filmId))
-    .then(data => {
-      const passwordError = notice({
-        text: "Film is added to queue",
-        width: '450px',
-        delay: 3500,
+
+  if (user) {
+    const uid = user.uid;
+    fetch(
+      `${refs.API_URL}/movie/${filmId}?api_key=f13d574bf8d052eda50f9ad2f6a4d7c7&language=en-US&page=1`,
+    )
+      .then(response => response.json())
+      .then(data => updateData(uid, data, 'queue', filmId))
+      .then(data => {
+        const passwordError = notice({
+          text: 'Film is added to queue',
+          width: '450px',
+          delay: 3500,
+        });
       });
+  } else {
+    notice({
+      text: 'Login or register',
+      width: '300px',
+      delay: 3500,
     });
+  }
 }
 
 // signIn(auth, 'nana@email.com', 'mypassword');
 // signOutuser(auth, 'nana@email.com', 'mypassword');
+// signOutuser(auth, 'ju@gmail.com');
 
 function loadLibraryPage() {
+  // switchSignInButton()
   showLibraryHeader();
   showWatchedData();
 }
@@ -285,7 +289,6 @@ function showQueueData() {
   clearFilmGallery();
 
   const user = isUserAuthorised();
-  // console.log('user', user.uid);
   if (!user) {
     console.log('User is signed out');
     refs.filmGallery.insertAdjacentHTML('afterbegin', addSignInMessageForQueue());
@@ -329,7 +332,7 @@ function showWatched(user) {
 
       } else {
         // console.log('No data available');
-        const watchedNotice= notice({
+        const watchedNotice = notice({
           text: "You haven't yet any film in watched",
           width: '450px',
           delay: 3500,
@@ -480,3 +483,5 @@ function addSignInMessageForWatched() {
 function addSignInMessageForQueue() {
   return '<li class="login__notification"><p>You should first log in to see films in queue.</p><li>';
 }
+
+export { isUserAuthorised, signOutOfSystem, clearFilmGallery };

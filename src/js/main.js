@@ -1,14 +1,9 @@
 import { appendPopularFilmsMarkup, clearGalleryMarkup } from './home.js'
 import { spinnerShow } from './spinner';
+import getRefs from './refs'
+const refs = getRefs();
 
-
-const galleryRef = document.querySelector('.film-gallery');
-spinnerShow(galleryRef);
+spinnerShow(refs.filmGallery);
 
 // ----- Функция заполняет галерею популярными фильмами (стартовая страница)
 appendPopularFilmsMarkup();
-
-
-// ----- Функция очищает галерею
-// clearGalleryMarkup();
-
