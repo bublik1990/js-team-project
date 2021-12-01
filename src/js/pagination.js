@@ -111,36 +111,5 @@ export function addListenerToPag(arrayOfMovies ,totalPages, page, list) {
   
 }
 
-export function addListenerToLibraryPag(arrayOfMovies, totalPages, page, list) {
-    console.log(arrayOfMovies);
- page = Number(page)
-    console.log(totalPages);
-    
-  list.addEventListener('click', (e) => {
-  if (e.target.className == 'next') {
-      createPagination(totalPages, page += 1, list)
-      pageNum += 1
-    // galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[page]);
-    }
-//   if (e.target.id == 'next-svg') {
-//     createPagination(totalPages, page += 1, list)
-//     galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[page]);
-//     }
-//   if (e.target.id == 'prev-svg') {
-//     createPagination(totalPages, page -= 1, list)
-//     galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[page]);
-//     }
-//   if (e.target.className == 'prev') {
-//     createPagination(totalPages, page -= 1, list)
-//     galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[page]);
-//     } 
-//   if (e.target.classList.contains('numb')) {
-//     createPagination(totalPages, e.target.innerHTML, list)
-//         page = Number(e.target.innerHTML);
-//         galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[page - 1]);
-//     }
-  })
-  
-}
 
 

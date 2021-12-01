@@ -378,7 +378,6 @@ function addListener(e, page, totalPages, arrayOfMovies) {
     if (e.target.className == 'next') {
       refs.filmGallery.innerHTML = ''
       pageNum += 1
-      // console.log(arrayOfMovies);
       paginate(arrayOfMovies);
       createPagination(totalPages, page += 1, list)
     }
