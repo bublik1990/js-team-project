@@ -62,15 +62,15 @@ async function collectFilms(form, searchQuery) {
     //когда функция получила все фильмы то page сбрасывется, удаляется последний пустой масив и создается разметка
     API.resetPage();
     arrayOfMovies.pop();
-    createPagMrkp();
+    createPagMrkp(arrayOfMovies);
     return;
   }
 }
 
 const list = document.querySelector('.pag-ul');
-function createPagMrkp() {
+function createPagMrkp(arrayOfMovies) {
   list.innerHTML = createPagination(arrayOfMovies.length - 1, 1, list);
-  addListenerToPag(arrayOfMovies.length - 1, 1, list);
+  addListenerToPag(arrayOfMovies,arrayOfMovies.length - 1, 1, list);
   searchErrorMes.classList.add('is-hidden');
 
 }

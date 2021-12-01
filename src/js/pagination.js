@@ -83,12 +83,17 @@ export function createPagination(totalPages, page, list) {
 }
 
 export function addListenerToPag(arrayOfMovies ,totalPages, page, list) {
- page = Number(page)
+  // console.log(arrayOfMovies, totalPages, page, list);
+  console.log(page);
+  page = Number(page)
+  console.log(page);
   console.log(totalPages);
   list.addEventListener('click', (e) => {
-  if (e.target.className == 'next') {
+    if (e.target.className == 'next') {
     createPagination(totalPages, page += 1, list)
     galleryRef.innerHTML = filmCardOnSearchTpl(arrayOfMovies[page]);
+    console.log(totalPages, page, list, arrayOfMovies[page]);
+
     }
   if (e.target.id == 'next-svg') {
     createPagination(totalPages, page += 1, list)
