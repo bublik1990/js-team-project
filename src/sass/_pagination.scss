@@ -77,3 +77,81 @@
   background: var(--aiming-color);
   color: var(--main-background-color);
 }
+
+@media screen and (max-width: 320px) {
+  .pagination {
+    padding: 0;
+    padding-bottom: 137px;
+  }
+  .pagination__container {
+    display: flex;
+    justify-content: center;
+  }
+  .pag-ul {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  .numb {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+  }
+  .numb:hover {
+    transition: 0.3s;
+    background: var(--aiming-color);
+    color: var(--main-background-color);
+  }
+  .numb,
+  .dots {
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    margin: 0;
+    margin-right: 5px;
+
+    padding: 3px;
+  }
+
+  .dots {
+    display: none;
+  }
+  .prev,
+  .next {
+    width: 40px;
+    height: 40px;
+    background: var(--main-background-color);
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .prev {
+    margin-right: 5px;
+  }
+  .prev > svg,
+  .next > svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .prev:hover,
+  .next:hover {
+    background: var(--aiming-color);
+    transition: 0.3s;
+  }
+  .next:hover path,
+  .prev:hover path {
+    stroke: var(--main-background-color);
+    transition: 0.3s;
+  }
+  .active {
+    pointer-events: none;
+    background: var(--aiming-color);
+    color: var(--main-background-color);
+  }
+}
