@@ -1,4 +1,7 @@
 .film-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 4px;
   max-width: 280px;
   font-family: 'Roboto', sans-serif;
@@ -10,18 +13,14 @@
   cursor: pointer;
   transition: box-shadow 250ms ease;
 
-  @media screen and(min-width:768px) {
-    max-width: 293px;
-  }
   @media screen and(min-width:1024px) {
     max-width: 274px;
   }
 
   &__img {
-    border-radius: 4px;
     max-width: 280px;
     display: block;
-    height: auto;
+    height: 420px;
     transition: all 0.5s ease;
     &:hover,
     &:focus {
@@ -30,11 +29,9 @@
       transition: all 250ms ease;
     }
 
-    @media screen and(min-width:768px) {
-      max-width: 293px;
-    }
     @media screen and(min-width:1024px) {
       max-width: 274px;
+      height: 411px;
     }
   }
   &__list {
@@ -87,9 +84,13 @@
 .backup {
   position: relative;
   display: block;
-  width: 293px;
-  height: 439px;
+  max-width: 280px;
+  height: 420px;
   background-color: rgba(0, 0, 0, 0.3);
+  @media screen and(min-width:1024px) {
+      max-width: 274px;
+      height: 411px;
+    }
 
   &-text {
     color: rgb(146, 121, 88);
