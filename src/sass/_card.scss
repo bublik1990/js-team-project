@@ -16,19 +16,19 @@
   @media screen and(min-width:1024px) {
     max-width: 274px;
   }
-  
-&__img {
-  border-radius: 4px;
-  max-width: 280px;
-  display: block;
-  height: auto;
-  transition: all 0.5s ease;
-  &:hover,
-  &:focus{
-    transform: scale(1.05) translateY(-5px);
-    box-shadow: 4px -1px 14px 4px rgba(255, 107, 8, 0.5);
-    transition: all 250ms ease;
-  }
+
+  &__img {
+    border-radius: 4px;
+    max-width: 280px;
+    display: block;
+    height: auto;
+    transition: all 0.5s ease;
+    &:hover,
+    &:focus {
+      transform: scale(1.05) translateY(-5px);
+      box-shadow: 4px -1px 14px 4px rgba(255, 107, 8, 0.5);
+      transition: all 250ms ease;
+    }
 
     @media screen and(min-width:768px) {
       max-width: 293px;
@@ -113,4 +113,9 @@
 
 .pnotify {
   margin-top: 80px;
+}
+
+.backup-modal {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.3);
 }

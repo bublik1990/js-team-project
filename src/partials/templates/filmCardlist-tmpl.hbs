@@ -1,21 +1,37 @@
 {{#each this.results}}
   <li class='film-card' data-id='{{this.id}}'>
-    <img
-      class='film-card__img'
-      src='https://image.tmdb.org/t/p/w500{{this.poster_path}}'
-      alt='{{this.original_title}}'
-    />
+   {{#if this.poster_path}}
+      <img
+        class='film-card__img'
+        src='https://image.tmdb.org/t/p/w500{{this.poster_path}}'
+        alt='{{this.original_title}}'
+      />
+    {{/if}}
+    {{#unless this.poster_path}}
+      <div class='backup film-card__img'>
+        <p class='backup-warning'>
+          No Img found
+        </p>
+      </div>
+    {{/unless}}
     <h3 class='film-card__header'>{{this.original_title}}{{this.name}}</h3>
     <div class='film-card__meta'>
       <ul class='film-card__list'>
-        {{#each this.genre_ids}}
-          <li class='film-card__list-item'>{{this}}</li>
-        {{/each}}
-        {{#each this.genres}}
-        <li class='film-card__list-item'>{{this.name}}</li>
-        {{/each}}
+        {{#if this.genre_ids}}
+          {{#each this.genre_ids}}
+            <li class='film-card__list-item'>{{this}}</li>
+          {{/each}}
+        {{/if}}
+        {{#unless this.genre_ids}}
+          <li class='film-card__list-item'>Other</li>
+        {{/unless}}
       </ul>
-      <span class='film-card__year'>{{this.release_date}}{{this.first_air_date}}</span>
+      {{#if this.release_date}}
+        <span class='film-card__year'>{{this.release_date}}</span>
+      {{/if}}
+      {{#if this.first_air_date}}
+        <span class='film-card__year'>{{this.first_air_date}}</span>
+      {{/if}}
       <span class='film-card__rating'>{{this.vote_average}}</span>
     </div>
   </li>

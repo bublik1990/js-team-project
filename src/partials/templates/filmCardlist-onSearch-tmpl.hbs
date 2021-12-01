@@ -8,7 +8,7 @@
       />
     {{/if}}
     {{#unless this.poster_path}}
-      <div class='backup'>
+      <div class='backup film-card__img'>
         <p class='backup-warning'>
           No Img found
         </p>
@@ -27,11 +27,12 @@
         {{/unless}}
       </ul>
         {{#if this.release_date}}
-      <span class='film-card__year'>{{this.release_date}}{{this.first_air_date}}</span>
+      <span class='film-card__year'>{{this.release_date}}</span>
         {{/if}}
-        {{#unless this.release_date}}
-         <span class='film-card__year'>release_date unknown</span>
-        {{/unless}}
+        {{#if this.first_air_date}}
+      <span class='film-card__year'>{{this.first_air_date}}</span>
+        {{/if}}
+
 
       <span class='film-card__rating'>{{this.vote_average}}</span>
     </div>
