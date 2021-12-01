@@ -1,7 +1,8 @@
-import {isUserAuthorised, signOutOfSystem, clearFilmGallery} from './firebase.js';
+import { isUserAuthorised, signOutOfSystem, clearFilmGallery } from './firebase.js';
+import getRefs from './refs'
+const refs = getRefs();
 
-const tabs = document.querySelectorAll('.signin__choice li');
-tabs.forEach(tab => tab.addEventListener('click', makeTabActive));
+refs.tabs.forEach(tab => tab.addEventListener('click', makeTabActive));
 
 function makeTabActive(event) {
     const tab = event.currentTarget;
@@ -21,19 +22,6 @@ function makeTabActive(event) {
     tabContent.classList.remove('visually-hidden');
 
 }
-
-const refs = {
-    openSignInModalBtn: document.querySelectorAll('[data-signin-open]'),
-    closeSignInModalBtn: document.querySelectorAll('[data-signin-close]'),
-    signinModal: document.querySelector('[data-signin-modal]'),
-    signinModalBackdrop: document.querySelector('.signin-backdrop'),
-    signoutYesBtn: document.querySelector('.signout__yes'),
-    signoutNoBtn: document.querySelector('.signout__no'),
-    signInform: document.querySelector('#signin'),
-    registrationForm: document.querySelector('#registration'),
-    signInBlock: document.querySelector('.signin__wrap'),
-    signOutBlock: document.querySelector('.signout__wrap'),
-  };
 
   refs.openSignInModalBtn.forEach(el => el.addEventListener('click', toggleModal));
   refs.closeSignInModalBtn.forEach(el => el.addEventListener('click', toggleModal));
@@ -73,7 +61,7 @@ function onEscClick(el) {
 
 function resetForms() {
   refs.signInform.reset();
-  registrationForm.reset()
+  refs.registrationForm.reset()
 }
 
 function showSigninPanel() {
