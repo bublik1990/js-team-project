@@ -12,7 +12,7 @@ const API = new fetchFilms();
 const galleryRef = document.querySelector('.film-gallery');
 const searchFormRef = document.querySelector('.header__form');
 const searchErrorMes = document.querySelector('.header__search-error');
-const pagContainer = document.querySelector('.pagination__container')
+const pagContainer = document.querySelector('.pagination__container');
 
 export function clearGalleryMarkup() {
   galleryRef.innerHTML = '';
@@ -30,7 +30,6 @@ async function onSearch(e) {
   const form = e.currentTarget;
   const searchQuery = form.elements.query.value.toLowerCase().trim();
 
-
   if (!searchQuery) {
     // ----- Ошибка, если запрос пустой
     searchErrorMes.classList.remove('is-hidden');
@@ -41,39 +40,37 @@ async function onSearch(e) {
     arrayOfMovies = [];
   }
 
-  await collectFilms(form, searchQuery)
+  await collectFilms(form, searchQuery);
 
 }
 
 async function collectFilms(form, searchQuery) {
-
   API.query = searchQuery;
   clearGalleryMarkup();
   hiddenErrorMes();
   spinnerShow(galleryRef);
   const filmsCollection = await API.getSearchFilms();
-  //пушу колекцию 
-  arrayOfMovies.push(filmsCollection.results)
-  console.log(filmsCollection.results)
+  //пушу колекцию
+  arrayOfMovies.push(filmsCollection.results);
   appendSearchFilmsMarkup(arrayOfMovies);
   toFixCardMarkup();
 
   if (arrayOfMovies[API.returnPage() - 2].length !== 0) {
-    await collectFilms(form, searchQuery)
+    await collectFilms(form, searchQuery);
     //пока функии не вернут масив без фильмов, она будет просить ещё
   } else {
     //когда функция получила все фильмы то page сбрасывется, удаляется последний пустой масив и создается разметка
     API.resetPage();
-    arrayOfMovies.pop()
-    createPagMrkp()
-    return 
+    arrayOfMovies.pop();
+    createPagMrkp();
+    return;
   }
 }
 
-const list = document.querySelector(".pag-ul");
+const list = document.querySelector('.pag-ul');
 function createPagMrkp() {
-  list.innerHTML = createPagination(arrayOfMovies.length, 1, list);
-  addListenerToPag(arrayOfMovies, arrayOfMovies.length, 1, list)
+  list.innerHTML = createPagination(arrayOfMovies.length - 1, 1, list);
+  addListenerToPag(arrayOfMovies.length - 1, 1, list);
   searchErrorMes.classList.add('is-hidden');
 
 }
@@ -87,12 +84,12 @@ export function hiddenErrorMes() {
 }
 
 // ----- Слушатель на кнопке поиска
-searchFormRef.addEventListener('submit', (e) => {
-    e.preventDefault();
-    onSearch(e);
-})
+searchFormRef.addEventListener('submit', e => {
+  e.preventDefault();
+  onSearch(e);
+});
 
-const headerHomeBtn = document.querySelector('.header__home-page')
+const headerHomeBtn = document.querySelector('.header__home-page');
 
 // ----- Слушатель на кнопке Home
 for (let i = 0; i < headerHomeBtn.length; i++) {
@@ -102,14 +99,14 @@ for (let i = 0; i < headerHomeBtn.length; i++) {
     clearGalleryMarkup();
     spinnerShow(galleryRef);
     appendPopularFilmsMarkup();
-  })
+  });
 }
 
-const headerLibraryBtn = document.querySelector('.header__library-page')
+const headerLibraryBtn = document.querySelector('.header__library-page');
 
 headerLibraryBtn.addEventListener('click', () => {
-  list.innerHTML = ''
-})
+  list.innerHTML = '';
+});
 
 // ----- Слушатель на кнопке Library
 for (let i = 0; i < headerLibraryBtn.length; i++) {
@@ -117,5 +114,5 @@ for (let i = 0; i < headerLibraryBtn.length; i++) {
     headerHomeBox.classList.add('is-inactive');
     headerLibraryBox.classList.remove('is-inactive');
     clearGalleryMarkup();
-  })
+  });
 }
