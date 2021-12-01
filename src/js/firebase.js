@@ -3,16 +3,13 @@ import '@pnotify/core/dist/BrightTheme.css';
 const _ = require('lodash');
 const { notice, error } = require('@pnotify/core');
 
-import template from '../partials/templates/filmCardlist-tmpl.hbs';
 import { toFixCardMarkup } from './markup-service';
 import { spinnerShow, spinnerHide } from './spinner';
 import { appendPopularFilmsMarkup, hiddenErrorMes } from './home';
 import { initializeApp } from 'firebase/app';
 import filmCardTpl from '../partials/templates/filmCardlist-onSearch-tmpl.hbs'
 import { createPagination } from './pagination.js';
-// import { addListenerToLibraryPag } from './pagination.js';
 
-// import { getAnalytics } from 'firebase/analytics';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -113,16 +110,9 @@ onAuthStateChanged(auth, user => {
   if (user) {
     const uid = user.uid;
     get(child(dbRef, `users/${uid}/`)).then(snapshot => {
-      // console.log(snapshot.val());
     });
-  } else {
-    // User is signed out
-    // alert('войдите в систему');
-    // ...
-  }
+  } 
 });
-
-// const analytics = getAnalytics(app);
 
 function writeUserData(userId, ob) {
   set(ref(database, 'users/' + userId), ob);
@@ -134,18 +124,11 @@ function updateData(userId, ob, library, filmId) {
 
 const dbRef = ref(database);
 
-get(child(dbRef, `users/`)).then(snapshot => {
-  // console.log(snapshot.val());
-  // console.log(snapshot.toJSON());
-});
 
 /////////////////////////////////////////////////////////////////////////
 
 function onSubmitSignin(e) {
   e.preventDefault();
-
-  // refs.signFormEmail.classList.remove('incorrectField');
-  // refs.signFormPassword.classList.remove('incorrectField');
 
   const email = refs.signFormEmail.value;
   const password = refs.signFormPassword.value;
@@ -257,7 +240,6 @@ function onClickQueue() {
 // signOutuser(auth, 'ju@gmail.com');
 
 function loadLibraryPage() {
-  // switchSignInButton()
   showLibraryHeader();
   showWatchedData();
 }
@@ -274,7 +256,6 @@ function showWatchedData() {
   clearFilmGallery();
 
   const user = isUserAuthorised();
-  // console.log('user', user.uid);
   if (!user) {
     console.log('User is signed out');
     refs.filmGallery.insertAdjacentHTML('afterbegin', addSignInMessageForWatched());
@@ -318,12 +299,9 @@ function showWatched(user) {
   get(child(dbRef, `users/${user.uid}/watched/`))
     .then(snapshot => {
       if (snapshot.exists()) {
-          pageNum = 1
-      
-        // console.log(snapshot.val());
+        pageNum = 1
         clearFilmGallery();
         spinnerShow(refs.filmGallery);
-        // addMarkupGallery(snapshot.val());
         spinnerHide();
         arrayOfMovies = []
         arrayOfMovies = Object.values(snapshot.val());
@@ -331,7 +309,6 @@ function showWatched(user) {
         // addListenerToLibraryPag(arrayOfMovies, totalPages, pageNum, list)
 
       } else {
-        // console.log('No data available');
         const watchedNotice = notice({
           text: "You haven't yet any film in watched",
           width: '450px',
@@ -364,15 +341,15 @@ function paginate(data) {
   } else {
     totalPages = 0;
   }
-  list.innerHTML = ''
-  list.innerHTML = createPagination(totalPages, pageNum, list);
+  // list.innerHTML = ''
+  // list.innerHTML = createPagination(totalPages, pageNum, list);
 
 }
 
 
-list.addEventListener('click', (e) => {
-  addListener(e, pageNum, totalPages, arrayOfMovies)
-})
+// list.addEventListener('click', (e) => {
+//   addListener(e, pageNum, totalPages, arrayOfMovies)
+// })
 
 function addListener(e, page, totalPages, arrayOfMovies) {
     if (e.target.className == 'next') {
@@ -413,7 +390,6 @@ function showQueue(user) {
   get(child(dbRef, `users/${user.uid}/queue/`))
     .then(snapshot => {
       if (snapshot.exists()) {
-        // console.log(snapshot.val());
         clearFilmGallery();
         spinnerShow(refs.filmGallery);
         arrayOfMovies = []
@@ -437,12 +413,6 @@ function showQueue(user) {
 
 function clearFilmGallery() {
   refs.filmGallery.innerHTML = '';
-}
-
-function addMarkupGallery(data) {
-  const dataObj = { results: data };
-  refs.filmGallery.insertAdjacentHTML('beforeend', template(dataObj));
-  toFixCardMarkup();
 }
 
 function addMarkupLibrary(data) {

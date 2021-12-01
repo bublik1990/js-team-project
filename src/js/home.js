@@ -12,7 +12,6 @@ const API = new fetchFilms();
 const galleryRef = document.querySelector('.film-gallery');
 const searchFormRef = document.querySelector('.header__form');
 const searchErrorMes = document.querySelector('.header__search-error');
-const pagContainer = document.querySelector('.pagination__container');
 
 export function clearGalleryMarkup() {
   galleryRef.innerHTML = '';
