@@ -1,6 +1,5 @@
 import modalCardtpl from '../partials/templates/modalCard.hbs';
 import { modalSpinnerShow } from './spinner';
-//import filmCardTpl from '../partials/templates/nrfilmCardlist-tmpl.hbs';
 
 const openModal = document.querySelector('.film-backdrop');
 const openFilmCard = document.querySelector('.film-gallery');

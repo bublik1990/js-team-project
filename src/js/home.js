@@ -53,6 +53,7 @@ async function collectFilms(form, searchQuery) {
   const filmsCollection = await API.getSearchFilms();
   //пушу колекцию 
   arrayOfMovies.push(filmsCollection.results)
+  console.log(filmsCollection.results)
   appendSearchFilmsMarkup(arrayOfMovies);
   toFixCardMarkup();
 
